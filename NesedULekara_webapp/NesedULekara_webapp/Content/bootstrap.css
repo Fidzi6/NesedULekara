@@ -4501,7 +4501,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #0000CC;
   border-color: #080808;
 }
 
@@ -4944,6 +4944,7 @@ a.list-group-item.active > .badge,
 
 .container .jumbotron {
   border-radius: 6px;
+    background-color: #66FF66;
 }
 
 @media screen and (min-width: 768px) {
