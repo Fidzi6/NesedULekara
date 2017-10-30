@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,22 +15,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-using NesedLekar.Pages;
-using Windows.UI.Core;
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
-namespace NesedLekar
+namespace NesedLekar.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class CalendarPage : Page
     {
-        public MainPage()
+        public CalendarPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -36,14 +34,10 @@ namespace NesedLekar
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void loginBT_Click(object sender, RoutedEventArgs e)
+        private void calendarView_DayItemChange(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage));
-        }
-
-        private void regBT_Click(object sender, RoutedEventArgs e)
-        {
-            (Window.Current.Content as Frame).Navigate(typeof(RegistrationPage));
+            if (args.Item.Date.Date.Equals(DateTime.Now.Date))
+                args.Item.Background = new SolidColorBrush(Colors.Blue);
         }
     }
 }

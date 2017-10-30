@@ -5,20 +5,31 @@
     xmlns:local="using:NesedLekar"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" MinWidth="50" MinHeight="50">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox x:Name="loginTB" HorizontalAlignment="Left" Margin="150,207,0,0" Text="" VerticalAlignment="Top" Width="187" AutomationProperties.AccessibilityView="Control"/>
-        <TextBox HorizontalAlignment="Left" Margin="150,244,0,0" Text="" VerticalAlignment="Top" Width="187"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,210,0,0" TextWrapping="Wrap" Text="Prihlasovacie meno :" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="100,247,0,0" TextWrapping="Wrap" Text="Heslo :" VerticalAlignment="Top"/>
-        <Button Content="Prihlásiť" HorizontalAlignment="Left" Margin="150,314,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" AutomationProperties.AccessibilityView="Control"/>
-        <Rectangle Fill="#FF07C7FF" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="360"/>
-        <TextBlock HorizontalAlignment="Left" Margin="56,28,0,0" TextWrapping="Wrap" Text="Neseď u Lekára" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="36"/>
-        <CheckBox Content="Automatické prihlásenie" HorizontalAlignment="Left" Margin="150,277,0,0" VerticalAlignment="Top"/>
-        <Button Content="Registrácia" HorizontalAlignment="Left" Margin="133,105,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <RelativePanel HorizontalAlignment="Left" Height="100" Margin="28,100,0,0" VerticalAlignment="Top" Width="100"/>
-
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top">
+                <Rectangle MinHeight="20"></Rectangle>
+                <TextBlock TextWrapping="Wrap" Text="Neseď u Lekára" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <Rectangle MinHeight="20"></Rectangle>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10" Grid.RowSpan="2">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBox x:Name="loginTB" Margin="10,10,10,0" Text="" VerticalAlignment="Top" Header="Prihlasovacie meno :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <PasswordBox x:Name="passwordTB" Margin="10,10,10,0" Header="Heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <CheckBox x:Name="autoLogChB" Margin="10,10,10,0" Content="Automatické prihlásenie" FontFamily="Times New Roman" FontSize="18" HorizontalAlignment="Stretch" MaxWidth="205"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10" MaxWidth="180">
+                        <Button x:Name="loginBT" Content="Prihlásiť" Click="loginBT_Click"/>
+                        <Button x:Name="regBT" Content="Registrácia" Click="regBT_Click" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

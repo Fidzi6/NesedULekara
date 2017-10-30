@@ -8,7 +8,28 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox HorizontalAlignment="Left" Margin="10,10,0,0" Text="" VerticalAlignment="Top" Header="Prihlasovacie meno :" FontFamily="Times New Roman" FontSize="18" Width="190"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top">
+                <Rectangle MinHeight="20"></Rectangle>
+                <TextBlock TextWrapping="Wrap" Text="Registrácia" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <Rectangle MinHeight="20"></Rectangle>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBox  Margin="10,10,10,10" Text="" Header="Prihlasovacie meno :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <MenuFlyoutSeparator></MenuFlyoutSeparator>
+                    <PasswordBox  Margin="10,10,10,0" Header="Heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <PasswordBox  Margin="10,10,10,0" Header="Znovu heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10" MaxWidth="125">
+                        <Button x:Name="okBT" Content="Ok" Click="okBT_Click"/>
+                        <Button x:Name="stornoBT" Content="Storno" Margin="10,0,0,0" Click="stornoBT_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

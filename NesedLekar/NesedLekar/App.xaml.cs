@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 namespace NesedLekar
 {
     /// <summary>
@@ -29,7 +30,7 @@ namespace NesedLekar
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            this.Suspending += OnSuspending;            
         }
 
         /// <summary>
@@ -71,7 +72,21 @@ namespace NesedLekar
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
         }
+
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+
+            if (root != null && root.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                root.GoBack();
+            }
+        }
+
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
