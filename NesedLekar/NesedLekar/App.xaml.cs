@@ -77,8 +77,14 @@ namespace NesedLekar
         }
 
         private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
+        {            
             Frame root = Window.Current.Content as Frame;
+
+            if (root.SourcePageType.Name.Equals("CalendarPage"))
+            {
+                e.Handled = true;
+                return;
+            }
 
             if (root != null && root.CanGoBack && e.Handled == false)
             {

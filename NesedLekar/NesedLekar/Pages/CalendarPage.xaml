@@ -15,13 +15,14 @@
             </Grid.RowDefinitions>
             <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top" Orientation="Vertical">
                 <Rectangle MinHeight="20"></Rectangle>
-                <TextBlock TextWrapping="Wrap" Text="Objednávky" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="Objednania" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
                 <Rectangle MinHeight="20"></Rectangle>                
             </StackPanel>
             <CalendarView x:Name="calendarView" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CalendarViewDayItemChanging="calendarView_DayItemChange"></CalendarView>            
         </Grid>
         <CommandBar VerticalAlignment="Bottom">
             <AppBarButton Icon="Add" AutomationProperties.HelpText="" Label="Objednať"></AppBarButton>
+            <AppBarButton Icon="Document"></AppBarButton>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Setting" Label="Settings"/>
             </CommandBar.SecondaryCommands>

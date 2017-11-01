@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,25 +21,16 @@ namespace NesedLekar.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CalendarPage : Page
+    public sealed partial class DoctorPage : Page
     {
-        public CalendarPage()
+        public DoctorPage()
         {
             this.InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-        }
-
-        private void calendarView_DayItemChange(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
         {
-            
-            if (args.Item.Date.Date.Equals(DateTime.Now.Date))
-                args.Item.Background = new SolidColorBrush(Colors.Red);
-            else if (Comparer<DateTime>.Default.Compare(args.Item.Date.Date, new DateTime(2017, 12, 12)) == 0)            
-                args.Item.Background = new SolidColorBrush(Colors.Green);
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
     }
 }
