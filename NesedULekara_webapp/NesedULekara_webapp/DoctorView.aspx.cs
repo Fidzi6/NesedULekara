@@ -7,16 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace NesedULekara_webapp
 {
-    public partial class _Default : Page
+    public partial class DoctorView : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void signInButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/DoctorView.aspx");
         }
     }
 }

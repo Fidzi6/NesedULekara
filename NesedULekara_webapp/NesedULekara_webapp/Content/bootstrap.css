@@ -4501,13 +4501,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #0000CC;
-  border-color: #080808;
+    background-color: #21c9ce;
+    border-color: #080808;
 }
 
-.navbar-inverse .navbar-brand {
-  color: #999999;
-}
+    .navbar-inverse .navbar-brand {
+        color: #000;
+    }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
@@ -4519,9 +4519,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #999999;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-  color: #999999;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #000;
+    }
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -4943,8 +4943,8 @@ a.list-group-item.active > .badge,
 }
 
 .container .jumbotron {
-  border-radius: 6px;
-    background-color: #66FF66;
+    border-radius: 6px;
+    background-color: #7ce7ea;
 }
 
 @media screen and (min-width: 768px) {

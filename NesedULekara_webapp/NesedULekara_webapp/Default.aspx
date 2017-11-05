@@ -10,7 +10,7 @@
         &nbsp;
         <asp:TextBox ID="loginTextBox" runat="server"></asp:TextBox>
     &nbsp; <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
-    &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" />
+    &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" OnClick="signInButton_Click" />
     </div>
 
 </asp:Content>
