@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="NesedLekar.Pages.AppointmentCheckPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NesedLekar.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Margin="12,12,12,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top">
+                <Rectangle MinHeight="20"></Rectangle>
+                <TextBlock TextWrapping="Wrap" Text="Objednať" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <Rectangle MinHeight="20"></Rectangle>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="20">
+                <TextBlock Text="Potvrdenie objednávky" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"/>
+            <ScrollViewer Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin="0,10,0,10" Orientation="Vertical">
+                        <TextBlock Margin="20,5,20,5" Text="Lekár"/>
+                        <TextBlock Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="10,5,10,5" Text="Adresa"/>
+                        <TextBlock Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="10,5,10,5" Text="Dátum"/>
+                        <TextBlock Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="10,5,10,5" Text="Čas"/>
+                        <TextBlock Margin="10,0,10,10" Text="-"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <AppBarButton Icon="Cancel" Content="Potvrdiť" HorizontalAlignment="Right" Click="AppBarButton_Click_1"/>
+                        <AppBarButton Margin="30,0,0,0" Icon="Accept" Content="Potvrdiť" HorizontalAlignment="Right" Click="AppBarButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>        
+    </Grid>
+</Page>

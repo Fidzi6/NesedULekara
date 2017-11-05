@@ -1,15 +1,16 @@
 ﻿<Page
-    x:Class="NesedLekar.Pages.AppointmentPage"
+    x:Class="NesedLekar.Pages.AppointmentDatePagexaml"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NesedLekar.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loading="Page_Loading">
+    mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Margin="12,12,12,12">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -20,23 +21,16 @@
                 <Rectangle MinHeight="20"></Rectangle>
             </StackPanel>
             <Grid Grid.Row="1" Margin="20">
-                <TextBlock Text="Zvolťe mesto" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                <TextBlock Text="Zvolťe dátum a čas" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
             </Grid>
             <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"/>
-            <ListView x:Name="listLV" Grid.Row="3" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="x:String">
-                        <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
-                            <Image Source="ms-appx:///Assets/city.png" MaxHeight="48" MaxWidth="48"/>
-                            <StackPanel Margin="15,0,0,0" Orientation="Vertical" VerticalAlignment="Center">
-                                <TextBlock Text="{x:Bind}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <DatePicker Grid.Row="2" Margin="0,10,0,20" HorizontalAlignment="Center" DateChanged="DatePicker_DateChanged"/>
+            <MenuFlyoutSeparator Grid.Row="2" VerticalAlignment="Bottom"/>
+            <ListView x:Name="listLV" Grid.Row="3" Margin="0,10,0,0" ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
+                
             </ListView>
-            <TextBlock x:Name="noCityTB" Grid.Row="2" Margin="20" Text="Žiadne Mesto" FontStyle="Italic" HorizontalAlignment="Center"/>
-            <ProgressRing x:Name="processPR" Grid.Row="2" IsActive="False"/>
-        </Grid>        
+            <TextBlock x:Name="noDateTB" Grid.Row="3" Margin="20" Text="Žiadny voľný čas" FontStyle="Italic" HorizontalAlignment="Center"/>
+            <ProgressRing Grid.Row="3" IsActive="False"/>
+        </Grid>
     </Grid>
 </Page>

@@ -18,12 +18,19 @@
                 <TextBlock TextWrapping="Wrap" Text="Lekár" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
                 <Rectangle MinHeight="20"></Rectangle>
             </StackPanel>
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Meno:"></TextBlock>
-                    <TextBlock Text="-"></TextBlock>
-                    <TextBlock Text="Adresa:"></TextBlock>
-                    <TextBlock Text="-"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="img" Source="ms-appx:///Assets/doctorM.png" MaxHeight="128" MaxWidth="128"></Image>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="0,10,0,0" Text="   Meno:"></TextBlock>
+                            <TextBlock Margin="0,10,0,0" x:Name="nameTB" Text="-"></TextBlock>
+                        </StackPanel>                        
+                    </StackPanel>
+                    <TextBlock Margin="20,20,0,0" Text="Oddelenie:"></TextBlock>
+                    <TextBlock Margin="0,10,0,0" x:Name="departmentTB" Text="-"></TextBlock>
+                    <TextBlock Margin="20,20,0,0" Text="Adresa:"></TextBlock>
+                    <TextBlock Margin="0,10,0,0" x:Name="addressTB" Text="-"></TextBlock>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

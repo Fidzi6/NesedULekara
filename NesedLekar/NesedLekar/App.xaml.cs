@@ -30,7 +30,10 @@ namespace NesedLekar
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;            
+            this.Suspending += OnSuspending;
+
+            //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = Windows.Globalization.ApplicationLanguages.Languages[0];
+            //string s = "";
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace NesedLekar
         {            
             Frame root = Window.Current.Content as Frame;
 
-            if (root.SourcePageType.Name.Equals("CalendarPage"))
+            if (root.SourcePageType.Name.Equals("CalendarPage") || root.SourcePageType.Name.Equals("AppointmentCheckPage"))
             {
                 e.Handled = true;
                 return;

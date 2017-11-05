@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="NesedLekar.Pages.DoctorsPage"
+    x:Class="NesedLekar.Pages.AppointmentDoctorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NesedLekar.Pages"
@@ -12,22 +12,25 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top">
                 <Rectangle MinHeight="20"></Rectangle>
-                <TextBlock TextWrapping="Wrap" Text="Lekári" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="Objednať" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
                 <Rectangle MinHeight="20"></Rectangle>
             </StackPanel>
-            <StackPanel Margin="0,10,0,20" Grid.Row="1" Orientation="Horizontal">
-                <ComboBox x:Name="mestoCB" Header="Mesto" MaxWidth="130"></ComboBox>
-                <ComboBox x:Name="oddelenieCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="130" SelectedIndex="0">
+            <Grid Grid.Row="1" Margin="20">
+                <TextBlock Text="Zvolťe lekára" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+            </Grid>
+            <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"/>
+            <StackPanel Margin="0,10,0,20" Grid.Row="2" Orientation="Horizontal">
+                <ComboBox x:Name="oddelenieCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="200" SelectedIndex="0" >
                     <ComboBoxItem Content="Všetky oddelenia"></ComboBoxItem>
                 </ComboBox>
-                <Button Margin="10,0,0,0" VerticalAlignment="Bottom" Content="Obnoviť"></Button>                
             </StackPanel>
-            <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"></MenuFlyoutSeparator>
-            <ListView x:Name="listLV" Grid.Row="2" IsItemClickEnabled="True" SelectionMode="Single" ItemClick="listLV_ItemClick">
+            <MenuFlyoutSeparator Grid.Row="2" VerticalAlignment="Bottom"></MenuFlyoutSeparator>
+            <ListView x:Name="listLV" Grid.Row="3" Margin="0,10,0,0" IsItemClickEnabled="True" SelectionMode="Single" ItemClick="listLV_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:DoctorItem">
                         <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
@@ -38,10 +41,10 @@
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
-                </ListView.ItemTemplate>                
+                </ListView.ItemTemplate>
             </ListView>
-            <TextBlock x:Name="noDoctorTB" Grid.Row="2" Margin="20" Text="Žiadny Lekár" FontStyle="Italic"/>
-            <ProgressRing Grid.Row="2" IsActive="False"/>
-        </Grid>        
+            <TextBlock x:Name="noDoctorTB" Grid.Row="3" Margin="20" Text="Žiadny Lekár" FontStyle="Italic" HorizontalAlignment="Center"/>
+            <ProgressRing Grid.Row="3" IsActive="False"/>
+        </Grid>
     </Grid>
 </Page>

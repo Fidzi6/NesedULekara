@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,31 +20,27 @@ namespace NesedLekar.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AppointmentPage : Page
+    public sealed partial class AppointmentDoctorPage : Page
     {
-        public AppointmentPage()
+        public AppointmentDoctorPage()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void listLV_ItemClick(object sender, ItemClickEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePagexaml), e.ClickedItem);
         }
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            listLV.Items.Add("Košice");
+            listLV.Items.Add(new DoctorItem("Fero", "", "Chirurg"));
+            listLV.Items.Add(new DoctorItem("Jano", "", "Všeobecny"));
 
             if (listLV.Items.Count > 0)
-                noCityTB.Visibility = Visibility.Collapsed;
+                noDoctorTB.Visibility = Visibility.Collapsed;
             else
-                noCityTB.Visibility = Visibility.Visible;
-        }
-
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            (Window.Current.Content as Frame).Navigate(typeof(AppointmentDoctorPage), e.ClickedItem);
+                noDoctorTB.Visibility = Visibility.Visible;
         }
     }
 }

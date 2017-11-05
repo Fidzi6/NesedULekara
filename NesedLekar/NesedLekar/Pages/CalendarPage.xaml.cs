@@ -27,6 +27,7 @@ namespace NesedLekar.Pages
         public CalendarPage()
         {
             this.InitializeComponent();
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -36,11 +37,22 @@ namespace NesedLekar.Pages
 
         private void calendarView_DayItemChange(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
         {
-            
+            //if (args.Item.Date.Date.Equals(DateTime.Now.Date))
+            //    args.Item.Background = new SolidColorBrush(Colors.Red);
             if (args.Item.Date.Date.Equals(DateTime.Now.Date))
-                args.Item.Background = new SolidColorBrush(Colors.Red);
-            else if (Comparer<DateTime>.Default.Compare(args.Item.Date.Date, new DateTime(2017, 12, 12)) == 0)            
+                args.Item.Background = new SolidColorBrush(Colors.Blue);
+            else if (Comparer<DateTime>.Default.Compare(args.Item.Date.Date, new DateTime(2017, 12, 12)) == 0)
                 args.Item.Background = new SolidColorBrush(Colors.Green);
+        }
+
+        private void doctorAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(DoctorsPage));
+        }
+
+        private void addAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentPage));
         }
     }
 }
