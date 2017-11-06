@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -20,27 +21,29 @@ namespace NesedLekar.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AppointmentDoctorPage : Page
+    public sealed partial class CommentPage : Page
     {
-        public AppointmentDoctorPage()
+        public CommentPage()
         {
             this.InitializeComponent();
         }
 
-        private void listLV_ItemClick(object sender, ItemClickEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePage), e.ClickedItem);
-        }
+            CommentInfo comment = e.Parameter as CommentInfo;
 
-        private void Page_Loading(FrameworkElement sender, object args)
-        {
-            listLV.Items.Add(new DoctorItem("Fero", "", "Chirurg"));
-            listLV.Items.Add(new DoctorItem("Jano", "", "Všeobecny"));
+            if(comment!=null)
+            {
+                Paragraph p = new Paragraph();
+                Run r = new Run();
 
-            if (listLV.Items.Count > 0)
-                noDoctorTB.Visibility = Visibility.Collapsed;
-            else
-                noDoctorTB.Visibility = Visibility.Visible;
+                nameTB.Text = comment.Name;
+                dateTB.Text = comment.Date + " " + comment.Time;
+
+                r.Text = comment.FullText;
+                p.Inlines.Add(r);
+                commentRTB.Blocks.Add(p);
+            }            
         }
     }
 }

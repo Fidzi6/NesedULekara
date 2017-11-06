@@ -49,5 +49,49 @@ namespace NesedLekar.Pages
                     catch (Exception) { img.Source = new BitmapImage(new Uri("ms-appx:///Assets/doctorM.png")); }
             }
         }
+
+        private void Grid_Loading(FrameworkElement sender, object args)
+        {
+            listLV.Items.Add(new CommentInfo("dobrý.", "Laci", "01.01.2007", "10:00"));
+            listLV.Items.Add(new CommentInfo("Ta to ten doktor sa nezdá.", "Peťo", "01.05.2007", "08:00"));
+            listLV.Items.Add(new CommentInfo("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuudddddddddddddddskfjsdlkfjsdklfjsdlfjldksfjklsdvbnsdlneiopnavlsenvlkashnerfnsdlkvnaeivn laejhifsdgklvjhaeiovn aiocfhnvlskhnvl ksdbhofhedvn klwehsfue", "Peťo", "01.05.2007", "08:00"));
+
+            if (listLV.Items.Count > 0)
+                noCommentTB.Visibility = Visibility.Collapsed;
+            else
+                noCommentTB.Visibility = Visibility.Visible;
+        }
+
+        private void listLV_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(CommentPage), e.ClickedItem);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePage), doctor);
+        }
+    }
+
+    public class CommentInfo
+    {
+        private string fullText;
+        private string name;
+        private string date;
+        private string time;
+                
+        public string FullText { get => fullText; set => fullText = value; }
+        public string Name { get => name; set => name = value; }
+        public string Date { get { return "(" + date + ")"; } set { date = value; } }
+        public string Time { get => time; set => time = value; }
+
+        public CommentInfo(string fullText, string name, string date, string time)
+        {
+            this.fullText = fullText;
+            this.name = name;
+            this.date = date;
+            this.time = time;
+        }
+
     }
 }

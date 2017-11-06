@@ -7,9 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loading="Grid_Loading">
         <Grid Margin="12,12,12,12">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -18,19 +19,37 @@
                 <TextBlock TextWrapping="Wrap" Text="Lekár" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
                 <Rectangle MinHeight="20"></Rectangle>
             </StackPanel>
-            <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
+                <Image x:Name="img" Source="ms-appx:///Assets/doctorM.png" MaxHeight="128" MaxWidth="128"></Image>
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Image x:Name="img" Source="ms-appx:///Assets/doctorM.png" MaxHeight="128" MaxWidth="128"></Image>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Margin="0,10,0,0" Text="   Meno:"></TextBlock>
-                            <TextBlock Margin="0,10,0,0" x:Name="nameTB" Text="-"></TextBlock>
-                        </StackPanel>                        
-                    </StackPanel>
-                    <TextBlock Margin="20,20,0,0" Text="Oddelenie:"></TextBlock>
+                    <Button Content="Objednať sa" Click="Button_Click"/>
+                    <TextBlock Margin="0,10,0,0" Text="   Meno:"></TextBlock>
+                    <TextBlock Margin="0,10,0,0" x:Name="nameTB" Text="-"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <ScrollViewer Grid.Row="2" Margin="0,10,0,0">
+                <StackPanel Orientation="Vertical">                    
+                    <TextBlock Margin="20,10,0,0" Text="Oddelenie:"></TextBlock>
                     <TextBlock Margin="0,10,0,0" x:Name="departmentTB" Text="-"></TextBlock>
                     <TextBlock Margin="20,20,0,0" Text="Adresa:"></TextBlock>
                     <TextBlock Margin="0,10,0,0" x:Name="addressTB" Text="-"></TextBlock>
+                    <MenuFlyoutSeparator Margin="0,10,0,0"/>
+                    <TextBlock Margin="0,10,0,10" Text="Komentáre" HorizontalAlignment="Center" FontSize="20"/>
+                    <ListView x:Name="listLV" IsItemClickEnabled="True" ItemClick="listLV_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:CommentInfo">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="10,0,0,0" Text="{x:Bind Name}"/>
+                                        <TextBlock Margin="15,0,0,0" Text="{x:Bind Date}"/>
+                                    </StackPanel>
+                                    <TextBlock Margin="0,5,0,5" Text="{x:Bind FullText}" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>                        
+                    </ListView>
+                    <TextBlock x:Name="noCommentTB" Margin="20" Text="Žiadny komentár" FontStyle="Italic"/>
+                    <ProgressRing Grid.Row="2" IsActive="False"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

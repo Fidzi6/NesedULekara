@@ -101,8 +101,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AppointmentCheckPagexaml.xaml.cs">
-      <DependentUpon>AppointmentCheckPagexaml.xaml</DependentUpon>
+    <Compile Include="Pages\AppointmentCheckPage.xaml.cs">
+      <DependentUpon>AppointmentCheckPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AppointmentDatePage.xaml.cs">
       <DependentUpon>AppointmentDatePage.xaml</DependentUpon>
@@ -115,6 +115,9 @@
     </Compile>
     <Compile Include="Pages\CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DoctorPage.xaml.cs">
       <DependentUpon>DoctorPage.xaml</DependentUpon>
@@ -155,7 +158,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\AppointmentCheckPagexaml.xaml">
+    <Page Include="Pages\AppointmentCheckPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CalendarPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CommentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
