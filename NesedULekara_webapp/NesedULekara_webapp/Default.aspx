@@ -11,6 +11,18 @@
         <asp:TextBox ID="loginTextBox" runat="server"></asp:TextBox>
     &nbsp; <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
     &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" OnClick="signInButton_Click" />
+        &nbsp;&nbsp;
+        <asp:Button ID="testButton" runat="server" class="btn btn-default" Text="createTable" OnClick="testButton_Click"/>
+    &nbsp;<br />
+        <br />
+&nbsp;<asp:Button ID="insertToDB" runat="server" class="btn btn-default" Text="write to test table" OnClick="insertToDB_Click" />
+        <br />
+        <br />
+        <asp:Button ID="readFromDB" runat="server" class="btn btn-default" Text="read from test table" OnClick="readFromDB_Click" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="stringLabel" runat="server" Text="---"></asp:Label>
+    &nbsp;&nbsp;
+        <asp:Label ID="intLabel" runat="server" Text="---"></asp:Label>
     </div>
 
 </asp:Content>
