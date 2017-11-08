@@ -57,8 +57,8 @@ namespace NesedULekara_webapp
             {
                 using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[testt] (stlpec1, stlpec2) VALUES (@c1, @c2)", conn))
                 {
-                    cmd.Parameters.AddWithValue("@c1", "ahoj");
-                    cmd.Parameters.AddWithValue("@c2", 20);
+                    cmd.Parameters.AddWithValue("@c1", "serus");
+                    cmd.Parameters.AddWithValue("@c2", 102);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -74,7 +74,7 @@ namespace NesedULekara_webapp
             var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(cnnString))
             {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT s.stlpec1, s.stlpec2 FROM dbo.[testt] AS s WHERE s.id=1", conn))
+                using (SqlCommand cmd = new SqlCommand(@"SELECT s.stlpec1, s.stlpec2 FROM dbo.[testt] AS s WHERE s.id=5", conn))
                 {
                     conn.Open();
                     using (var reader = cmd.ExecuteReader())

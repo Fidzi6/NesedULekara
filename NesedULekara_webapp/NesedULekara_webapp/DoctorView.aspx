@@ -3,6 +3,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    serus
+    <div class="jumbotron">
+        lekar
+    </div>
 
 </asp:Content>
