@@ -27,17 +27,17 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Margin="0,10,0,10" Orientation="Vertical">
                         <TextBlock Margin="20,5,20,5" Text="Lekár"/>
-                        <TextBlock Margin="10,0,10,10" Text="-"/>
-                        <TextBlock Margin="10,5,10,5" Text="Adresa"/>
-                        <TextBlock Margin="10,0,10,10" Text="-"/>
-                        <TextBlock Margin="10,5,10,5" Text="Dátum"/>
-                        <TextBlock Margin="10,0,10,10" Text="-"/>
-                        <TextBlock Margin="10,5,10,5" Text="Čas"/>
-                        <TextBlock Margin="10,0,10,10" Text="-"/>
+                        <TextBlock x:Name="doctorTB" Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="20,5,10,5" Text="Adresa"/>
+                        <TextBlock x:Name="addressTB" Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="20,5,10,5" Text="Dátum"/>
+                        <TextBlock x:Name="dateTB" Margin="10,0,10,10" Text="-"/>
+                        <TextBlock Margin="20,5,10,5" Text="Čas"/>
+                        <TextBlock x:Name="timeTB" Margin="10,0,10,10" Text="-"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <AppBarButton Icon="Cancel" Content="Potvrdiť" HorizontalAlignment="Right" Click="AppBarButton_Click_1"/>
-                        <AppBarButton Margin="30,0,0,0" Icon="Accept" Content="Potvrdiť" HorizontalAlignment="Right" Click="AppBarButton_Click"/>
+                        <AppBarButton Icon="Cancel" Content="Potvrdiť" HorizontalAlignment="Right" Click="cancelAppBarButton_Click"/>
+                        <AppBarButton Margin="30,0,0,0" Icon="Accept" Content="Potvrdiť" HorizontalAlignment="Right" Click="okAppBarButton_Click"/>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

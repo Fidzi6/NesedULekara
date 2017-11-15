@@ -39,12 +39,13 @@ namespace NesedLekar.Pages
             if (doctor != null)
             {
                 nameTB.Text = doctor.Name;
+                addressTB.Text = doctor.Address;
                 departmentTB.Text = doctor.Department;
 
-                if (doctor.ImageSource != null && doctor.ImageSource != string.Empty)
+                if (doctor.Address != null && doctor.Address != string.Empty)
                     try
                     {
-                        img.Source = new BitmapImage(new Uri(doctor.ImageSource));
+                        img.Source = new BitmapImage(new Uri(doctor.Img));
                     }
                     catch (Exception) { img.Source = new BitmapImage(new Uri("ms-appx:///Assets/doctorM.png")); }
             }
@@ -71,27 +72,5 @@ namespace NesedLekar.Pages
         {
             (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePage), doctor);
         }
-    }
-
-    public class CommentInfo
-    {
-        private string fullText;
-        private string name;
-        private string date;
-        private string time;
-                
-        public string FullText { get => fullText; set => fullText = value; }
-        public string Name { get => name; set => name = value; }
-        public string Date { get { return "(" + date + ")"; } set { date = value; } }
-        public string Time { get => time; set => time = value; }
-
-        public CommentInfo(string fullText, string name, string date, string time)
-        {
-            this.fullText = fullText;
-            this.name = name;
-            this.date = date;
-            this.time = time;
-        }
-
     }
 }

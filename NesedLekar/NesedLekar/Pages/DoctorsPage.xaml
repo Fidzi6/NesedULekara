@@ -31,7 +31,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:DoctorItem">
                         <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
-                            <Image Source="{x:Bind ImageSource}" MaxHeight="48" MaxWidth="48"></Image>
+                            <Image Source="{x:Bind Img}" MaxHeight="48" MaxWidth="48"></Image>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{x:Bind Name}"></TextBlock>
                                 <TextBlock Text="{x:Bind Department}"></TextBlock>

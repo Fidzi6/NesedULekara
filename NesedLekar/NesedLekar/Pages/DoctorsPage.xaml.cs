@@ -35,7 +35,7 @@ namespace NesedLekar.Pages
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            listLV.ItemsSource = new List<DoctorItem>() { new DoctorItem("Jano", "", "Vseobecny"), new DoctorItem("Fero", "", "Chirurg") };
+            listLV.ItemsSource = new List<DoctorItem>() { new DoctorItem("Jana", "Prešov", "Vseobecny", false), new DoctorItem("Fero", "Poprad", "Chirurg", true) };
 
             RefreshDoctors();
         }
@@ -55,25 +55,5 @@ namespace NesedLekar.Pages
         }
     }
 
-    public class DoctorItem
-    {
-        private string name;
-        private string img;
-        private string dep;
-
-        public string Name { get => name; set => name = value; }
-        public string ImageSource { get => img; set => img = value; }
-        public string Department { get => dep; set => dep = value; }
-
-        public DoctorItem(string name, string imgSource, string department)
-        {
-            this.name = name;
-            this.dep = department;
-
-            if (imgSource == null || imgSource == string.Empty)
-                this.img = "ms-appx:///Assets/doctorM.png";
-            else
-                this.img = imgSource;
-        }
-    }
+    
 }

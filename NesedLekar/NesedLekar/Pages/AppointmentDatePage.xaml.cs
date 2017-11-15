@@ -22,9 +22,19 @@ namespace NesedLekar.Pages
     /// </summary>
     public sealed partial class AppointmentDatePage : Page
     {
+        private DoctorItem doctor;
+
         public AppointmentDatePage()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();            
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter as DoctorItem != null)
+                doctor= e.Parameter as DoctorItem;
+            else
+                doctor = null;
         }
 
         private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -43,7 +53,7 @@ namespace NesedLekar.Pages
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(AppointmentCheckPage), e.ClickedItem);
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentCheckPage), new AppointmentInfo(doctor, dateDTP.Date.ToString("dd.MM.yyyy"), e.ClickedItem.ToString()));
         }
     }
 }

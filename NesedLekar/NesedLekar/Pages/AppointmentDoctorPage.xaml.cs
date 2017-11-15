@@ -34,8 +34,8 @@ namespace NesedLekar.Pages
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            listLV.Items.Add(new DoctorItem("Fero", "", "Chirurg"));
-            listLV.Items.Add(new DoctorItem("Jano", "", "Všeobecny"));
+            listLV.Items.Add(new DoctorItem("Fero", "Košice", "Chirurg", true));
+            listLV.Items.Add(new DoctorItem("Jana", "Prešov", "Všeobecny", false));
 
             if (listLV.Items.Count > 0)
                 noDoctorTB.Visibility = Visibility.Collapsed;

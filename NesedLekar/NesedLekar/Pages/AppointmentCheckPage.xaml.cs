@@ -22,17 +22,34 @@ namespace NesedLekar.Pages
     /// </summary>
     public sealed partial class AppointmentCheckPage : Page
     {
+        private AppointmentInfo info;
+
         public AppointmentCheckPage()
         {
             this.InitializeComponent();
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter as AppointmentInfo != null)
+            {
+                info = e.Parameter as AppointmentInfo;
+
+                doctorTB.Text = info.Doctor.Name;
+                addressTB.Text = info.Doctor.Address;
+                dateTB.Text = info.Date;
+                timeTB.Text = info.Time;
+            }
+            else
+                info = null;
+        }
+
+        private void okAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(CalendarPage));
         }
 
-        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        private void cancelAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(CalendarPage));
         }
