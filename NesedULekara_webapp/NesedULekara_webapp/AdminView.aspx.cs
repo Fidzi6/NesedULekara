@@ -44,28 +44,28 @@ namespace NesedULekara_webapp
             lattitude.Text = adrs.Latitude.ToString();
             longitude.Text = adrs.Longitude.ToString();
 
-            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cnnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[???] VALUES (@c1, @c2)", conn))
-                {
-                    cmd.Parameters.AddWithValue("@c1", doctorTitleTxb.Text); //titul
-                    cmd.Parameters.AddWithValue("@c2", doctorNameTxb.Text); //meno
-                    cmd.Parameters.AddWithValue("@c3", doctorSurnameTxb.Text); //priezvisko
-                    cmd.Parameters.AddWithValue("@c4", doctorPositionTxb.Text); //zaradenie
-                    cmd.Parameters.AddWithValue("@c5", doctorCityTxb.Text); //mesto
-                    cmd.Parameters.AddWithValue("@c6", doctorAddressTxb.Text); //adresa
-                    cmd.Parameters.AddWithValue("@c7", adrs.Latitude); //gps lattitude string
-                    cmd.Parameters.AddWithValue("@c8", adrs.Longitude); //gps longitude string
-                    cmd.Parameters.AddWithValue("@c9", 0); //hodnotenie - asi prázdna hodnota
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
+            //var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            //using (SqlConnection conn = new SqlConnection(cnnString))
+            //{
+            //    using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[???] VALUES (@c1, @c2)", conn))
+            //    {
+            //        cmd.Parameters.AddWithValue("@c1", doctorTitleTxb.Text); //titul
+            //        cmd.Parameters.AddWithValue("@c2", doctorNameTxb.Text); //meno
+            //        cmd.Parameters.AddWithValue("@c3", doctorSurnameTxb.Text); //priezvisko
+            //        cmd.Parameters.AddWithValue("@c4", doctorPositionTxb.Text); //zaradenie
+            //        cmd.Parameters.AddWithValue("@c5", doctorCityTxb.Text); //mesto
+            //        cmd.Parameters.AddWithValue("@c6", doctorAddressTxb.Text); //adresa
+            //        cmd.Parameters.AddWithValue("@c7", adrs.Latitude); //gps lattitude string
+            //        cmd.Parameters.AddWithValue("@c8", adrs.Longitude); //gps longitude string
+            //        cmd.Parameters.AddWithValue("@c9", 0); //hodnotenie - asi prázdna hodnota
+            //        conn.Open();
+            //        cmd.ExecuteNonQuery();
+            //        conn.Close();
+            //    }
+            //}
 
-            doctorCityTxb.Text = null;
-            doctorAddressTxb.Text = null;
+            //doctorCityTxb.Text = null;
+            //doctorAddressTxb.Text = null;
         }
     }
 
