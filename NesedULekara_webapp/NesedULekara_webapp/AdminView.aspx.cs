@@ -23,8 +23,8 @@ namespace NesedULekara_webapp
         //registration of a new doctor
         protected void Button1_Click(object sender, EventArgs e)
         {
-            lattitude.Text = null;
-            longitude.Text = null;
+            gpsResultTxb.Text = null;
+            GPSErrorTxb.Text = null;
             
             Adress adrs = new Adress();
             string adr = doctorCityTxb.Text + ", " + doctorAddressTxb.Text;
@@ -34,15 +34,14 @@ namespace NesedULekara_webapp
                 adrs.GeoCode();
                 if(adrs.ex1 != null)
                 {
-                    addressError.Text = "Nefunguje pripojenie na Google geocode API, adresa sa nedá preložiť do GPS súradníc.";
+                    GPSErrorTxb.Text = "Nefunguje pripojenie na Google geocode API, adresa sa nedá preložiť do GPS súradníc.";
                 }
                 if (adrs.ex2 != null)
                 {
-                    addressError.Text = "Neplatná adresa, skúste ju zadať znova.";
+                    GPSErrorTxb.Text = "Neplatná adresa, skúste ju zadať znova.";
                 }
             }
-            lattitude.Text = adrs.Latitude.ToString();
-            longitude.Text = adrs.Longitude.ToString();
+            gpsResultTxb.Text = adrs.Latitude.ToString() + ", " + adrs.Longitude.ToString();
 
             //var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             //using (SqlConnection conn = new SqlConnection(cnnString))
@@ -66,6 +65,11 @@ namespace NesedULekara_webapp
 
             //doctorCityTxb.Text = null;
             //doctorAddressTxb.Text = null;
+        }
+
+        protected void logoutButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
         }
     }
 

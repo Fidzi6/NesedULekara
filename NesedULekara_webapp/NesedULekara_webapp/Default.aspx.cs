@@ -19,10 +19,49 @@ namespace NesedULekara_webapp
 
         protected void signInButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/DoctorView.aspx");
+            //Response.Redirect("~/DoctorView.aspx");
+            if (loginTextBox.Text != null && passwordTextBox.Text != null)
+            {
+                //get login and password from textboxs
+                string login = loginTextBox.Text;
+                string pass = passwordTextBox.Text;
+
+                //try to perform login - only if entered values are correct (login exists and password is good)
+                try
+                {
+                    int right = 0;
+                    //precita heslo z tab. kde meno = MENO
+                    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection conn = new SqlConnection(cnnString))
+                    {
+                        var cmd = conn.CreateCommand();
+                        cmd.CommandText = @"SELECT s.rights FROM dbo.[login] AS s WHERE s.login = @c1 AND s.password = @c2";
+                        cmd.Parameters.AddWithValue("@c1", login);
+                        cmd.Parameters.AddWithValue("@c2", pass);
+                        conn.Open();
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                right = reader.GetInt32(0);
+                            }
+                        }
+                        conn.Close();
+                    }
+                    //Application["meno"] = meno;
+                    if (right == 1) Response.Redirect("~/AdminView.aspx");
+                    if (right == 2) Response.Redirect("~/DoctorView.aspx");
+                }
+                catch
+                {
+                    loginError.Text = "Nepodarilo sa prihlásiť. Skontrolujte si svoje prihlasovacie údaje.";
+                }
+            }
+            
+
         }
 
-        //test
+        //test CREATE TABLE
         protected void testButton_Click(object sender, EventArgs e)
         {
             var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -49,7 +88,7 @@ namespace NesedULekara_webapp
             }
         }
 
-        //test
+        //test INSERT
         protected void insertToDB_Click(object sender, EventArgs e)
         {
             var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;

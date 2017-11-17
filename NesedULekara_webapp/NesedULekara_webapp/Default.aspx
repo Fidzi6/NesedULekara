@@ -7,10 +7,15 @@
 
         <p class="lead">&nbsp;</p>
         <p class="lead">Prihlásenie pre lekára/administrátora portálu</p>
-        &nbsp;
-        <asp:TextBox ID="loginTextBox" runat="server"></asp:TextBox>
-    &nbsp; <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox>
-    &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" OnClick="signInButton_Click" />
+
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="loginTextBox" ErrorMessage="Nezadali ste login!" ForeColor="Red"> </asp:RequiredFieldValidator>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:RequiredFieldValidator runat="server" ControlToValidate="passwordTextBox" ErrorMessage="Nezadali ste heslo!" ForeColor="Red"></asp:RequiredFieldValidator> <br>
+        <asp:TextBox ID="loginTextBox" runat="server"></asp:TextBox> &nbsp;&nbsp; <asp:TextBox ID="passwordTextBox" runat="server" TextMode="Password"></asp:TextBox> <br>
+        
+    &nbsp; 
+    &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" OnClick="signInButton_Click" /> <br>
+        <asp:Label ID="loginError" runat="server" Text="" ForeColor="Red"></asp:Label>
         &nbsp;&nbsp;
         <asp:Button ID="testButton" runat="server" class="btn btn-default" Text="createTable" OnClick="testButton_Click"/>
     &nbsp;<br />

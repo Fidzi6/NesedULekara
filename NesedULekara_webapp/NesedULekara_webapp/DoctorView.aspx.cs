@@ -13,5 +13,10 @@ namespace NesedULekara_webapp
         {
 
         }
+
+        protected void logout2Button_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
     }
 }
