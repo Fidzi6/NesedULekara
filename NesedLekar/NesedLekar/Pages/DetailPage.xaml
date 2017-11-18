@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="NesedLekar.Pages.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NesedLekar.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Margin="12,12,12,65">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Background="#FF4FA6FD" VerticalAlignment="Top" Orientation="Vertical">
+                <Rectangle MinHeight="20"></Rectangle>
+                <TextBlock TextWrapping="Wrap" Text="Detail Objednania" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="36" HorizontalAlignment="Center"/>
+                <Rectangle MinHeight="20"></Rectangle>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" Orientation="Horizontal">
+                <Image x:Name="img" Source="ms-appx:///Assets/doctorM.png" MaxHeight="128" MaxWidth="128"></Image>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Margin="20,10,0,0" Text="Meno:"/>
+                    <TextBlock Margin="0,5,0,0" x:Name="nameTB" Text="-"/>
+                    <TextBlock Margin="20,15,0,0" Text="Adresa:"/>
+                    <TextBlock Margin="0,5,0,0" x:Name="addressTB" Text="-"/>
+                </StackPanel>                
+            </StackPanel>
+            <StackPanel Grid.Row="2"  Margin="0,10,0,0" Orientation="Vertical" Loading="StackPanel_Loading">
+                <TextBlock Margin="20,10,0,0" Text="Oddelenie:"/>
+                <TextBlock Margin="0,5,0,0" x:Name="departmentTB" Text="-"/>
+                <StackPanel Margin="0,30,0,0" Orientation="Vertical">
+                    <TextBlock Margin="20,0,0,0" Text="Dátum a čas:"/>
+                    <TextBlock x:Name="dateTB" Margin="0,10,0,0" Text="dd.mm.yyyy" HorizontalAlignment="Center" FontSize="30"/>
+                    <TextBlock x:Name="timeTB" Margin="0,10,0,0" Text="hh:mm" HorizontalAlignment="Center" FontSize="30"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <CommandBar VerticalAlignment="Bottom">
+            <AppBarButton Label="Vymazať" Icon="Delete"/>
+        </CommandBar>
+    </Grid>
+</Page>

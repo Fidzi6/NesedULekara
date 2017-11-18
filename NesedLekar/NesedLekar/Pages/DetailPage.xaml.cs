@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -20,11 +21,11 @@ namespace NesedLekar.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AppointmentCheckPage : Page
+    public sealed partial class DetailPage : Page
     {
         private AppointmentInfo info;
 
-        public AppointmentCheckPage()
+        public DetailPage()
         {
             this.InitializeComponent();
         }
@@ -32,26 +33,28 @@ namespace NesedLekar.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter as AppointmentInfo != null)
-            {
                 info = e.Parameter as AppointmentInfo;
-
-                doctorTB.Text = info.Doctor.Name;
-                addressTB.Text = info.Doctor.Address;
-                dateTB.Text = info.Date;
-                timeTB.Text = info.Time;
-            }
             else
                 info = null;
         }
 
-        private void okAppBarButton_Click(object sender, RoutedEventArgs e)
+        private void StackPanel_Loading(FrameworkElement sender, object args)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage), info);
-        }
+            if(info!=null)
+            {
+                nameTB.Text = info.Doctor.Name;
+                addressTB.Text = info.Doctor.Address;
+                departmentTB.Text = info.Doctor.Department;
+                dateTB.Text = info.Date;
+                timeTB.Text = info.Time;
 
-        private void cancelAppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage));
+                if (info.Doctor.Img != null && info.Doctor.Img != string.Empty)
+                    try
+                    {
+                        img.Source = new BitmapImage(new Uri(info.Doctor.Img));
+                    }
+                    catch (Exception) { img.Source = new BitmapImage(new Uri("ms-appx:///Assets/doctorM.png")); }
+            }
         }
     }
 }

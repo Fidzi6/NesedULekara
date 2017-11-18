@@ -84,7 +84,7 @@ namespace NesedLekar
             Frame root = Window.Current.Content as Frame;
 
             if (root.SourcePageType.Name.Equals("CalendarPage") || root.SourcePageType.Name.Equals("AppointmentCheckPage"))
-            {
+            {                
                 e.Handled = true;
                 return;
             }

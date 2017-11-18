@@ -29,16 +29,17 @@ namespace NesedLekar
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            Saver.Inicialize();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+        {            
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private void loginBT_Click(object sender, RoutedEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage));
+            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage), "login");
         }
 
         private void regBT_Click(object sender, RoutedEventArgs e)

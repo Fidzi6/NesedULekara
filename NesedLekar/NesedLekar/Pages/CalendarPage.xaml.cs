@@ -33,6 +33,14 @@ namespace NesedLekar.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {            
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
+            if (e.Parameter as AppointmentInfo != null)
+                Saver.AddInfo(e.Parameter as AppointmentInfo);
+            else if (e.Parameter as string != null && (e.Parameter as string) == "login")
+                Saver.Clear();
+
+            //Saver.AddInfo(new AppointmentInfo(new DoctorItem("Fero", "Košice", "Chirurg", true), "20. 11. 2017", "9:10"));
+            //Saver.AddInfo(new AppointmentInfo(new DoctorItem("Jana", "Prešov", "Detská", true), "10. 12. 2017", "19:10"));
         }
 
         private void calendarView_DayItemChange(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
@@ -53,6 +61,26 @@ namespace NesedLekar.Pages
         private void addAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(AppointmentPage));
+        }
+
+        private void Page_Loading(FrameworkElement sender, object args)
+        {
+            List<AppointmentInfo> linfo = new List<AppointmentInfo>();
+
+            for (int i = 0; i < Saver.Count; i++)
+                linfo.Add(Saver.GetInfo(i));
+
+            appointmentLV.ItemsSource = linfo;
+
+            if (appointmentLV.Items.Count > 0)
+                noAppointmentTB.Visibility = Visibility.Collapsed;
+            else
+                noAppointmentTB.Visibility = Visibility.Visible;
+        }
+
+        private void appointmentLV_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            (Window.Current.Content as Frame).Navigate(typeof(DetailPage), e.ClickedItem);
         }
     }
 }

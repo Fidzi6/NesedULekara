@@ -20,9 +20,11 @@
                 <Rectangle MinHeight="20"></Rectangle>
             </StackPanel>
             <StackPanel Margin="0,10,0,20" Grid.Row="1" Orientation="Horizontal">
-                <ComboBox x:Name="mestoCB" Header="Mesto" MaxWidth="130"></ComboBox>
-                <ComboBox x:Name="oddelenieCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="130" SelectedIndex="0">
-                    <ComboBoxItem Content="Všetky oddelenia"></ComboBoxItem>
+                <ComboBox x:Name="mestoCB" Header="Mesto" MaxWidth="120" SelectedIndex="0">
+                    <ComboBoxItem Content="Všetky"/>
+                </ComboBox>
+                <ComboBox x:Name="oddelenieCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="120" SelectedIndex="0">
+                    <ComboBoxItem Content="Všetky"/>
                 </ComboBox>
                 <Button Margin="10,0,0,0" VerticalAlignment="Bottom" Content="Obnoviť"></Button>                
             </StackPanel>

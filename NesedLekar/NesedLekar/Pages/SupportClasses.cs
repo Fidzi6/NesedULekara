@@ -6,6 +6,76 @@ using System.Threading.Tasks;
 
 namespace NesedLekar.Pages
 {
+    public static class Saver
+    {
+        private static List<AppointmentInfo> infos;
+
+        public static bool Inicilaize { get => infos != null; }
+
+        public static int Count
+        {
+            get
+            {
+                if (infos != null)
+                    return infos.Count;
+                else
+                    return 0;
+            }
+        }
+
+        public static AppointmentInfo GetInfo(int index)
+        {
+            return infos[index];
+        }
+
+        public static void Inicialize()
+        {
+            infos = new List<AppointmentInfo>();
+        }
+
+        public static void Clear()
+        {
+            infos.Clear();
+        }
+        
+        public static void AddInfo(AppointmentInfo info)
+        {
+            infos.Add(info);
+
+            infos.Sort((x, y) =>
+            {
+                bool b = false;
+                DateTime d1, d2;
+
+                try
+                {
+                    d1 = DateTime.Parse(x.Date);
+                    b = true;
+                    d2 = DateTime.Parse(y.Date);
+
+                    return DateTime.Compare(d1, d2);
+                }
+                catch (Exception)
+                {
+                    if (b)
+                        return -1;
+                    else
+                        return 1;
+                }
+            });
+        }
+
+        public static bool RemoveInfo(AppointmentInfo info)
+        {
+            return infos.Remove(info);
+        }
+
+        public static void RemoveInfo(int index)
+        {
+            infos.RemoveAt(index);
+        }
+    }
+
     public class DoctorItem
     {
         private string name;
@@ -57,16 +127,27 @@ namespace NesedLekar.Pages
         private DoctorItem doctor;
         private string date;
         private string time;
+        private DateTime dateDT;
 
-        public DoctorItem Doctor { get => doctor; set => doctor = value; }
-        public string Date { get => date; set => date = value; }
-        public string Time { get => time; set => time = value; }
+        public DoctorItem Doctor { get => doctor; }
+        public string Date { get => date; }
+        public string Time { get => time; }
+        public DateTime DateDT { get => dateDT; }
 
         public AppointmentInfo(DoctorItem doctor, string date, string time)
         {
-            this.Doctor = doctor;
-            this.Date = date;
-            this.Time = time;
+            //string[] sd, st;
+
+            this.doctor = doctor;
+            this.date = date;
+            this.time = time;
+
+            //sd = date.Split('.');
+            //st = time.Split(':');
+
+            //if (sd.Length > 2 && st.Length > 1)
+                
+
         }
     }
 }

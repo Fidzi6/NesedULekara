@@ -42,7 +42,7 @@ namespace NesedLekar.Pages
                 addressTB.Text = doctor.Address;
                 departmentTB.Text = doctor.Department;
 
-                if (doctor.Address != null && doctor.Address != string.Empty)
+                if (doctor.Img != null && doctor.Img != string.Empty)
                     try
                     {
                         img.Source = new BitmapImage(new Uri(doctor.Img));
