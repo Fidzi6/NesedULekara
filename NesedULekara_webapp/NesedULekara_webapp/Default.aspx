@@ -15,7 +15,7 @@
         
     &nbsp; 
     &nbsp; <asp:Button ID="signInButton" runat="server" class="btn btn-default" Text="Prihlásiť" OnClick="signInButton_Click" /> <br>
-        <asp:Label ID="loginError" runat="server" Text="" ForeColor="Red"></asp:Label>
+        <asp:Label ID="loginError" runat="server" Text="" ForeColor="Red"></asp:Label> <br>
         &nbsp;&nbsp;
         <asp:Button ID="testButton" runat="server" class="btn btn-default" Text="createTable" OnClick="testButton_Click"/>
     &nbsp;<br />

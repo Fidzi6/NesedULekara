@@ -69,7 +69,78 @@ namespace NesedULekara_webapp
 
         protected void logoutButton_Click(object sender, EventArgs e)
         {
+            //rq1.Enabled = false;
+            //rq2.Enabled = false;
+            //rq3.Enabled = false;
+            //rq4.Enabled = false;
+            //rq5.Enabled = false;
+            //rq6.Enabled = false;
+            //rq7.Enabled = false;
+            //rq8.Enabled = false;
+            //rq9.Enabled = false;
+            //rq10.Enabled = false;
+            //rq11.Enabled = false;
             Response.Redirect("~/Default.aspx");
+        }
+
+        //new doctor registration
+        protected void doctorRegister_Click(object sender, EventArgs e)
+        {
+            doctorRegistrationStatusTxb.Text = null;
+            try
+            {
+                //get time range from doctorDayStart to doctorDayEnd
+                DateTime start = DateTime.Parse(doctorDayStartTxb.Text);
+                DateTime end = DateTime.Parse(doctorDayEndTxb.Text);
+                TimeSpan range = end - start;
+
+                //determine whether it is possible to divide range into doctor-defined intervals for pacients
+                int interval = Int32.Parse(doctorPacientTimeTxb.Text);
+                if (range.TotalMinutes % interval == 0) //everything is ok
+                {
+                    double numOfIntervals = range.TotalMinutes / interval; //calculate number of intervals for pacients
+
+                    //create new specific table
+                    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(cnnString))
+                    {
+                        try
+                        {
+                            string command = @"CREATE TABLE ";
+                            command += doctorEmailTxb.Text; //table name = dbo.doctor_email
+                            command += "(date DATETIME, emergency VARCHAR(50), lunch VARCHAR(50)";
+                            for (int i = 0; i < numOfIntervals; i++) //cerate specific number of rows - depends on numberOfIntervals
+                            {
+                                command += ", ";
+                                command += start.AddMinutes(i * interval).ToString("hh_mm");
+                                command += "__";
+                                command += start.AddMinutes((i + 1) * interval).ToString("hh_mm");
+                                command += " VARCHAR(50)";
+                            }
+                            command += ");";
+
+                            using (SqlCommand cmd = new SqlCommand(command, con))
+                            {
+                                con.Open();
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            doctorRegistrationStatusTxb.Text = ex.ToString();
+                        }
+                    }
+                }
+                else //cannot create good intervals - must check time range or pacient interval
+                {
+                    doctorRegistrationStatusTxb.Text = "Nie je možné vytvoriť časové intervaly pre pacientov. Skontrolujte si začiatok a koniec služby, prípadne interval pre pacienta.";
+                }
+            }
+            catch (Exception ex)
+            {
+                doctorRegistrationStatusTxb.Text = ex.ToString();
+            }
         }
     }
 

@@ -41,6 +41,10 @@ namespace NesedULekara_webapp
                         conn.Open();
                         using (var reader = cmd.ExecuteReader())
                         {
+                            if (reader.HasRows == false)
+                            {
+                                loginError.Text = "Nepodarilo sa prihlásiť. Skontrolujte si svoje prihlasovacie údaje.";
+                            }
                             while (reader.Read())
                             {
                                 right = reader.GetInt32(0);
@@ -77,7 +81,7 @@ namespace NesedULekara_webapp
                     //
                     // The following code uses an SqlCommand based on the SqlConnection.
                     //
-                    using (SqlCommand command = new SqlCommand("CREATE TABLE testt(stlpec1 char(50), stlpec2 int, stlpec3 datetime);", con))
+                    using (SqlCommand command = new SqlCommand("CREATE TABLE doktor1(stlpec1 char(50), stlpec2 int, stlpec3 datetime);", con))
                         command.ExecuteNonQuery();
                     con.Close();
                 }
