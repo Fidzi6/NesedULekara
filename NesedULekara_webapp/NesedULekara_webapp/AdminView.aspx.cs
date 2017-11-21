@@ -20,19 +20,19 @@ namespace NesedULekara_webapp
             //ak je to prvý registrovaný lekár, tak musí manuálne napísať svoju špecifikáciu - dropDownList ostane skrytý!!!
         }
 
-        //registration of a new doctor
+        //GPS generation
         protected void Button1_Click(object sender, EventArgs e)
         {
             gpsResultTxb.Text = null;
             GPSErrorTxb.Text = null;
-            
+
             Adress adrs = new Adress();
             string adr = doctorCityTxb.Text + ", " + doctorAddressTxb.Text;
             adrs.Address = adr;
             while (adrs.Latitude == null || adrs.Longitude == null)
             {
                 adrs.GeoCode();
-                if(adrs.ex1 != null)
+                if (adrs.ex1 != null)
                 {
                     GPSErrorTxb.Text = "Nefunguje pripojenie na Google geocode API, adresa sa nedá preložiť do GPS súradníc.";
                 }
@@ -94,11 +94,48 @@ namespace NesedULekara_webapp
                 DateTime end = DateTime.Parse(doctorDayEndTxb.Text);
                 TimeSpan range = end - start;
 
-                //determine whether it is possible to divide range into doctor-defined intervals for pacients
+                //get datetimes of emergency and lunch
+                DateTime emergencyStart = DateTime.Parse(doctorEmergencyStartTxb.Text);
+                DateTime emergencyEnd = DateTime.Parse(doctorEmergencyEndTxb.Text);
+                DateTime lunchStart = DateTime.Parse(doctorLunchStartTxb.Text);
+                DateTime lunchEnd = DateTime.Parse(doctorLunchEndTxb.Text);
+                TimeSpan emerg = emergencyEnd - emergencyStart;
+                TimeSpan lunc = lunchEnd - lunchStart;
+
                 int interval = Int32.Parse(doctorPacientTimeTxb.Text);
+
+                //determine whether is possible to divide emergency and lunch into intervals
+                List<string> emlun = new List<string>();
+                if (emerg.TotalMinutes % interval == 0)
+                {
+                    if (lunc.TotalMinutes % interval == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        doctorRegistrationStatusTxb.Text += "Interval na obed sa nedá rozdeliť na definované časové úseky. Opravte si to!!!" + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    doctorRegistrationStatusTxb.Text += "Interval pohotovosti sa nedá rozdeliť na definované časové úseky. Opravte si to!!!" + Environment.NewLine;
+                }
+
+                //determine whether it is possible to divide range into doctor-defined intervals for pacients
                 if (range.TotalMinutes % interval == 0) //everything is ok
                 {
                     double numOfIntervals = range.TotalMinutes / interval; //calculate number of intervals for pacients
+
+                    //create list of start time intervals
+                    List<string> startIntervals = new List<string>();
+                    for (int i = 0; i < numOfIntervals; i++)
+                    {
+                        string s = start.AddMinutes(i * interval).ToString("HHmm");
+                        //s += "_";
+                        //s += start.AddMinutes((i + 1) * interval).ToString("HHmm");
+                        startIntervals.Add(s);
+                    }
 
                     //create new specific table
                     var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -107,14 +144,14 @@ namespace NesedULekara_webapp
                         try
                         {
                             string command = @"CREATE TABLE ";
-                            command += doctorEmailTxb.Text; //table name = dbo.doctor_email
-                            command += "(date DATETIME, emergency VARCHAR(50), lunch VARCHAR(50)";
+                            command += doctorEmailTxb.Text.Replace(".", "_"); //table name = dbo.doctor_email
+                            command += "(date DATETIME";
                             for (int i = 0; i < numOfIntervals; i++) //cerate specific number of rows - depends on numberOfIntervals
                             {
-                                command += ", ";
-                                command += start.AddMinutes(i * interval).ToString("hh_mm");
-                                command += "__";
-                                command += start.AddMinutes((i + 1) * interval).ToString("hh_mm");
+                                command += ", t";
+                                command += start.AddMinutes(i * interval).ToString("HHmm");
+                                command += "_";
+                                command += start.AddMinutes((i + 1) * interval).ToString("HHmm");
                                 command += " VARCHAR(50)";
                             }
                             command += ");";
@@ -134,7 +171,7 @@ namespace NesedULekara_webapp
                 }
                 else //cannot create good intervals - must check time range or pacient interval
                 {
-                    doctorRegistrationStatusTxb.Text = "Nie je možné vytvoriť časové intervaly pre pacientov. Skontrolujte si začiatok a koniec služby, prípadne interval pre pacienta.";
+                    doctorRegistrationStatusTxb.Text += "Nie je možné vytvoriť časové intervaly pre pacientov. Skontrolujte si začiatok a koniec služby, prípadne interval pre pacienta." + Environment.NewLine;
                 }
             }
             catch (Exception ex)

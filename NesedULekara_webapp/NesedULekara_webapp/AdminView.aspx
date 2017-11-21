@@ -33,7 +33,7 @@
         <asp:Button ID="doctorRegister" runat="server" Text="Registrovať nového lekára" OnClick="doctorRegister_Click" /> <br>
         <br>
         <asp:Label ID="Label8" runat="server" Text="Status registrácie: "></asp:Label> <br>
-        <asp:TextBox ID="doctorRegistrationStatusTxb" runat="server" BorderStyle="Solid" TextMode="MultiLine" Height="63px" Width="384px"></asp:TextBox>
+        <asp:TextBox ID="doctorRegistrationStatusTxb" runat="server" BorderStyle="Solid" TextMode="MultiLine" Height="179px" Width="598px"></asp:TextBox>
         <br>
         <hr />
         <asp:Button ID="logoutButton" runat="server" Text="Odhlásiť sa" OnClick="logoutButton_Click" />
