@@ -19,15 +19,15 @@
         <br>
         <hr />
         <h4>Úradné hodiny:</h4>
-        <asp:Label ID="Label10" runat="server" Text="Začiatok služby: "></asp:Label><asp:TextBox ID="doctorDayStartTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq7" runat="server" ControlToValidate="doctorDayStartTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%> <br>
-        <asp:Label ID="Label11" runat="server" Text="Koniec služby: "></asp:Label><asp:TextBox ID="doctorDayEndTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox> <br>
-        <asp:Label ID="Label12" runat="server" Text="Čas na jedného pacienta: "></asp:Label><asp:TextBox ID="doctorPacientTimeTxb" runat="server"></asp:TextBox>&nbsp;<asp:Label ID="Label17" runat="server" Text=" minút"></asp:Label><%--<asp:RequiredFieldValidator ID="rq9" runat="server" ControlToValidate="doctorPacientTimeTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%> <br>
-        <asp:Label ID="Label13" runat="server" Text="Pohotovosť od "></asp:Label><asp:TextBox ID="doctorEmergencyStartTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox>
+        <asp:Label ID="Label10" runat="server" Text="Začiatok služby: "></asp:Label><asp:TextBox ID="doctorDayStartTxb" runat="server" TextMode="Time" Text="7:00"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq7" runat="server" ControlToValidate="doctorDayStartTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%> <br>
+        <asp:Label ID="Label11" runat="server" Text="Koniec služby: "></asp:Label><asp:TextBox ID="doctorDayEndTxb" runat="server" TextMode="Time" Text="16:00"></asp:TextBox> <br>
+        <asp:Label ID="Label12" runat="server" Text="Čas na jedného pacienta: "></asp:Label><asp:TextBox ID="doctorPacientTimeTxb" runat="server" Text="30"></asp:TextBox>&nbsp;<asp:Label ID="Label17" runat="server" Text=" minút"></asp:Label><%--<asp:RequiredFieldValidator ID="rq9" runat="server" ControlToValidate="doctorPacientTimeTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%> <br>
+        <asp:Label ID="Label13" runat="server" Text="Pohotovosť od "></asp:Label><asp:TextBox ID="doctorEmergencyStartTxb" runat="server" TextMode="Time" Text="7:00"></asp:TextBox>
         &nbsp;
-        <asp:Label ID="Label14" runat="server" Text="   do "></asp:Label>&nbsp;<asp:TextBox ID="doctorEmergencyEndTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox> <br>
-        <asp:Label ID="Label15" runat="server" Text="Obedná prestávka od "></asp:Label><asp:TextBox ID="doctorLunchStartTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox>
+        <asp:Label ID="Label14" runat="server" Text="   do "></asp:Label>&nbsp;<asp:TextBox ID="doctorEmergencyEndTxb" runat="server" TextMode="Time" Text="8:30"></asp:TextBox> <br>
+        <asp:Label ID="Label15" runat="server" Text="Obedná prestávka od "></asp:Label><asp:TextBox ID="doctorLunchStartTxb" runat="server" TextMode="Time" Text="12:00"></asp:TextBox>
         &nbsp;
-        <asp:Label ID="Label16" runat="server" Text="do"></asp:Label>&nbsp; <asp:TextBox ID="doctorLunchEndTxb" runat="server" TextMode="Time" step="1800"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq10" runat="server" ControlToValidate="doctorLunchStartTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator><asp:RequiredFieldValidator ID="rq11" runat="server" ControlToValidate="doctorLunchEndTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%><br>
+        <asp:Label ID="Label16" runat="server" Text="do"></asp:Label>&nbsp; <asp:TextBox ID="doctorLunchEndTxb" runat="server" TextMode="Time" Text="12:30"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq10" runat="server" ControlToValidate="doctorLunchStartTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator><asp:RequiredFieldValidator ID="rq11" runat="server" ControlToValidate="doctorLunchEndTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%><br>
          <br>
         <hr />
         <asp:Button ID="doctorRegister" runat="server" Text="Registrovať nového lekára" OnClick="doctorRegister_Click" /> <br>
