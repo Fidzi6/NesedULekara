@@ -54,6 +54,4 @@ namespace NesedLekar.Pages
                 noDoctorTB.Visibility = Visibility.Visible;
         }
     }
-
-    
 }

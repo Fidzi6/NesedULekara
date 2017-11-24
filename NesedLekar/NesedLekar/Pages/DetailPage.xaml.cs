@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,6 +33,8 @@ namespace NesedLekar.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
             if (e.Parameter as AppointmentInfo != null)
                 info = e.Parameter as AppointmentInfo;
             else
