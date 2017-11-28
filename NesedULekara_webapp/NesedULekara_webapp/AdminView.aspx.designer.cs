@@ -85,6 +85,15 @@ namespace NesedULekara_webapp {
         protected global::System.Web.UI.WebControls.TextBox doctorTelephoneTxb;
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// Label4 control.
         /// </summary>
         /// <remarks>

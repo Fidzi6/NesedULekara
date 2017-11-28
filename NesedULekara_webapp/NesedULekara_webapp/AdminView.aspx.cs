@@ -17,12 +17,13 @@ namespace NesedULekara_webapp
         private Adress adrs;
         private static string lat;
         private static string longit;
+        //private static int c = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //načíta zoznam lekárskych zameraní z databázy - prečíta originálne zameranie už registrovaných lekárov
             //ak je to prvý registrovaný lekár, tak musí manuálne napísať svoju špecifikáciu - dropDownList ostane skrytý!!!
-            
+            //DropDownList1.Items.Clear();
             var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(cnnString))
             {
@@ -179,7 +180,7 @@ namespace NesedULekara_webapp
                     status = false;
                     status2 = false;
                 }
-                
+
                 if (status) //it is possile to create intervals, check whether is possible to delete emergency and lunch intervals from complete intervals list
                 {
                     //calculate number of all intervals for pacients
@@ -327,10 +328,15 @@ namespace NesedULekara_webapp
         //
         protected void DropDownList1_Init(object sender, EventArgs e)
         {
-            doctorPositionTxb.Text = DropDownList1.Text;
+            //doctorPositionTxb.Text = DropDownList1.Text;
         }
 
         protected void DropDownList1_TextChanged(object sender, EventArgs e)
+        {
+            //doctorPositionTxb.Text = DropDownList1.Text;
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             doctorPositionTxb.Text = DropDownList1.Text;
         }
