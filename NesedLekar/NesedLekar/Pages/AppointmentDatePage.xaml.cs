@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
+//<DatePicker x:Name="dateDTP" Grid.Row="2" Margin="0,10,0,20" HorizontalAlignment="Center" DateChanged="DatePicker_DateChanged"/>
 namespace NesedLekar.Pages
 {
     /// <summary>
@@ -26,7 +26,9 @@ namespace NesedLekar.Pages
 
         public AppointmentDatePage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+            dateDTP.MinDate = DateTime.Now.AddDays(1);
+            dateDTP.MaxDate = DateTime.Now.AddYears(1);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,7 +55,21 @@ namespace NesedLekar.Pages
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(AppointmentCheckPage), new AppointmentInfo(doctor, dateDTP.Date.ToString("dd.MM.yyyy"), e.ClickedItem.ToString()));
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentCheckPage), new AppointmentInfo(doctor, dateDTP.Date.Value.ToString("dd.MM.yyyy"), e.ClickedItem.ToString()));
+        }
+
+        private void DatePicker_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            listLV.ItemsSource = null;
+
+            listLV.Items.Add("9 : 00");
+            listLV.Items.Add("9 : 30");
+            listLV.Items.Add("10 : 00");
+
+            if (listLV.Items.Count > 0)
+                noDateTB.Visibility = Visibility.Collapsed;
+            else
+                noDateTB.Visibility = Visibility.Visible;
         }
     }
 }

@@ -24,7 +24,7 @@
                 <TextBlock Text="Zvolťe dátum a čas" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
             </Grid>
             <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"/>
-            <DatePicker x:Name="dateDTP" Grid.Row="2" Margin="0,10,0,20" HorizontalAlignment="Center" DateChanged="DatePicker_DateChanged"/>
+            <CalendarDatePicker x:Name="dateDTP" Grid.Row="2"  Margin="0,10,0,20" HorizontalAlignment="Center" DateChanged="DatePicker_DateChanged"/>            
             <MenuFlyoutSeparator Grid.Row="2" VerticalAlignment="Bottom"/>
             <ListView x:Name="listLV" Grid.Row="3" Margin="0,10,0,0" ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
                 

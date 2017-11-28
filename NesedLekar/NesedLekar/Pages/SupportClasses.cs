@@ -40,29 +40,32 @@ namespace NesedLekar.Pages
         
         public static void AddInfo(AppointmentInfo info)
         {
-            infos.Add(info);
-
-            infos.Sort((x, y) =>
+            if (!infos.Contains(info))
             {
-                bool b = false;
-                DateTime d1, d2;
+                infos.Add(info);
 
-                try
+                infos.Sort((x, y) =>
                 {
-                    d1 = DateTime.Parse(x.Date);
-                    b = true;
-                    d2 = DateTime.Parse(y.Date);
+                    bool b = false;
+                    DateTime d1, d2;
 
-                    return DateTime.Compare(d1, d2);
-                }
-                catch (Exception)
-                {
-                    if (b)
-                        return -1;
-                    else
-                        return 1;
-                }
-            });
+                    try
+                    {
+                        d1 = DateTime.Parse(x.Date);
+                        b = true;
+                        d2 = DateTime.Parse(y.Date);
+
+                        return DateTime.Compare(d1, d2);
+                    }
+                    catch (Exception)
+                    {
+                        if (b)
+                            return -1;
+                        else
+                            return 1;
+                    }
+                });
+            }
         }
 
         public static bool RemoveInfo(AppointmentInfo info)
@@ -127,12 +130,12 @@ namespace NesedLekar.Pages
         private DoctorItem doctor;
         private string date;
         private string time;
-        private DateTime dateDT;
+        //private DateTime dateDT;
 
         public DoctorItem Doctor { get => doctor; }
         public string Date { get => date; }
         public string Time { get => time; }
-        public DateTime DateDT { get => dateDT; }
+        //public DateTime DateDT { get => dateDT; }
 
         public AppointmentInfo(DoctorItem doctor, string date, string time)
         {
