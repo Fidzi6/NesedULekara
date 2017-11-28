@@ -65,74 +65,74 @@ namespace NesedULekara_webapp
 
         }
 
-        //test CREATE TABLE
-        protected void testButton_Click(object sender, EventArgs e)
-        {
-            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(cnnString))
-            {
+        ////test CREATE TABLE
+        //protected void testButton_Click(object sender, EventArgs e)
+        //{
+        //    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        //    using (SqlConnection con = new SqlConnection(cnnString))
+        //    {
 
-                try
-                {
-                    //
-                    // Open the SqlConnection.
-                    //
-                    con.Open();
-                    //
-                    // The following code uses an SqlCommand based on the SqlConnection.
-                    //
-                    using (SqlCommand command = new SqlCommand("CREATE TABLE doktor1(stlpec1 char(50), stlpec2 int, stlpec3 datetime);", con))
-                        command.ExecuteNonQuery();
-                    con.Close();
-                }
-                catch (Exception ex)
-                {
+        //        try
+        //        {
+        //            //
+        //            // Open the SqlConnection.
+        //            //
+        //            con.Open();
+        //            //
+        //            // The following code uses an SqlCommand based on the SqlConnection.
+        //            //
+        //            using (SqlCommand command = new SqlCommand("CREATE TABLE doktor1(stlpec1 char(50), stlpec2 int, stlpec3 datetime);", con))
+        //                command.ExecuteNonQuery();
+        //            con.Close();
+        //        }
+        //        catch (Exception ex)
+        //        {
                     
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
-        //test INSERT
-        protected void insertToDB_Click(object sender, EventArgs e)
-        {
-            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cnnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[testt] (stlpec1, stlpec2) VALUES (@c1, @c2)", conn))
-                {
-                    cmd.Parameters.AddWithValue("@c1", "serus");
-                    cmd.Parameters.AddWithValue("@c2", 102);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-        }
+        ////test INSERT
+        //protected void insertToDB_Click(object sender, EventArgs e)
+        //{
+        //    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        //    using (SqlConnection conn = new SqlConnection(cnnString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[testt] (stlpec1, stlpec2) VALUES (@c1, @c2)", conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("@c1", "serus");
+        //            cmd.Parameters.AddWithValue("@c2", 102);
+        //            conn.Open();
+        //            cmd.ExecuteNonQuery();
+        //            conn.Close();
+        //        }
+        //    }
+        //}
 
-        //test select
-        protected void readFromDB_Click(object sender, EventArgs e)
-        {
-            string v1 = null;
-            int v2 = 0;
-            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cnnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(@"SELECT s.stlpec1, s.stlpec2 FROM dbo.[testt] AS s WHERE s.id=5", conn))
-                {
-                    conn.Open();
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            v1 = reader.GetString(0);
-                            v2 = reader.GetInt32(1);
-                        }
-                    }
-                    conn.Close();
-                }
-            }
-            stringLabel.Text = v1;
-            intLabel.Text = v2.ToString();
-        }
+        ////test select
+        //protected void readFromDB_Click(object sender, EventArgs e)
+        //{
+        //    string v1 = null;
+        //    int v2 = 0;
+        //    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        //    using (SqlConnection conn = new SqlConnection(cnnString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand(@"SELECT s.stlpec1, s.stlpec2 FROM dbo.[testt] AS s WHERE s.id=5", conn))
+        //        {
+        //            conn.Open();
+        //            using (var reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    v1 = reader.GetString(0);
+        //                    v2 = reader.GetInt32(1);
+        //                }
+        //            }
+        //            conn.Close();
+        //        }
+        //    }
+        //    stringLabel.Text = v1;
+        //    intLabel.Text = v2.ToString();
+        //}
     }
 }

@@ -14,10 +14,34 @@ namespace NesedULekara_webapp
 {
     public partial class AdminView : System.Web.UI.Page
     {
+        private Adress adrs;
+        private static string lat;
+        private static string longit;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //načíta zoznam lekárskych zameraní z databázy - prečíta originálne zameranie už registrovaných lekárov
             //ak je to prvý registrovaný lekár, tak musí manuálne napísať svoju špecifikáciu - dropDownList ostane skrytý!!!
+            
+            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(cnnString))
+            {
+                using (SqlCommand cmd = new SqlCommand(@"SELECT DISTINCT s.specialization FROM dbo.[doctors] AS s", conn))
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                DropDownList1.Items.Add(reader.GetString(i));
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+            }
         }
 
         //GPS generation
@@ -26,7 +50,7 @@ namespace NesedULekara_webapp
             gpsResultTxb.Text = null;
             GPSErrorTxb.Text = null;
 
-            Adress adrs = new Adress();
+            adrs = new Adress();
             string adr = doctorCityTxb.Text + ", " + doctorAddressTxb.Text;
             adrs.Address = adr;
             while (adrs.Latitude == null || adrs.Longitude == null)
@@ -41,6 +65,8 @@ namespace NesedULekara_webapp
                     GPSErrorTxb.Text = "Neplatná adresa, skúste ju zadať znova.";
                 }
             }
+            lat = adrs.Latitude.ToString();
+            longit = adrs.Longitude.ToString();
             gpsResultTxb.Text = adrs.Latitude.ToString() + ", " + adrs.Longitude.ToString();
 
             //var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -224,19 +250,32 @@ namespace NesedULekara_webapp
                 if (status2) //all previous steps are correct, continue to table creation + write doctor data to table
                 {
                     //create string for whole emergency and lunch interval
-                    string em = emergencyStart.ToString("HHmm") + "_" + emergencyEnd.ToString("HHmm");
-                    string lu = lunchStart.ToString("HHmm") + "_" + lunchEnd.ToString("HHmm");
+                    string doctorEmergency = emergencyStart.ToString("HHmm") + "_" + emergencyEnd.ToString("HHmm");
+                    string doctorLunch = lunchStart.ToString("HHmm") + "_" + lunchEnd.ToString("HHmm");
 
-                    //read more doctor data from form
-                    //
-
-                    //write new doctor data to table
-                    //!!!!!!!!!!!!!!!!!!!!!
-                    //!!!!!!!!!!!!!!!!!!!!!!
-                    //!!!!!!!!!!!!!!!!!!!!!!!
+                    //write new doctor data to table dbo.doctors
+                    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection conn = new SqlConnection(cnnString))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[doctors] (name, surname, email, specialization, tel, adress, latitude, longitude, emergency, lunch) VALUES (@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @c10)", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@c1", doctorNameTxb.Text); //name
+                            cmd.Parameters.AddWithValue("@c2", doctorSurnameTxb.Text); //surname
+                            cmd.Parameters.AddWithValue("@c3", doctorEmailTxb.Text); //email
+                            cmd.Parameters.AddWithValue("@c4", doctorPositionTxb.Text); //function
+                            cmd.Parameters.AddWithValue("@c5", doctorTelephoneTxb.Text); //tel
+                            cmd.Parameters.AddWithValue("@c6", doctorCityTxb.Text + ", " + doctorAddressTxb.Text); //adress
+                            cmd.Parameters.AddWithValue("@c7", lat); //latitude
+                            cmd.Parameters.AddWithValue("@c8", longit); //longitude
+                            cmd.Parameters.AddWithValue("@c9", doctorEmergency); //emergency
+                            cmd.Parameters.AddWithValue("@c10", doctorLunch); //lunch
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                    }
 
                     //create new specific table
-                    var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                     using (SqlConnection con = new SqlConnection(cnnString))
                     {
                         try
@@ -283,6 +322,17 @@ namespace NesedULekara_webapp
             {
                 doctorRegistrationStatusTxb.Text = ex.ToString();
             }
+        }
+
+        //
+        protected void DropDownList1_Init(object sender, EventArgs e)
+        {
+            doctorPositionTxb.Text = DropDownList1.Text;
+        }
+
+        protected void DropDownList1_TextChanged(object sender, EventArgs e)
+        {
+            doctorPositionTxb.Text = DropDownList1.Text;
         }
     }
 
