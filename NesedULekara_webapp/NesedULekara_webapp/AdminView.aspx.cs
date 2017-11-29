@@ -276,6 +276,19 @@ namespace NesedULekara_webapp
                         }
                     }
 
+                    //write login and password to table dbo.login
+                    using (SqlConnection conn = new SqlConnection(cnnString))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[login] (login, password, rights) VALUES (@c1, @c2, 2)", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@c1", doctorEmailTxb.Text);
+                            cmd.Parameters.AddWithValue("@c2", doctorPasswordTxb.Text);
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                    }
+
                     //create new specific table
                     using (SqlConnection con = new SqlConnection(cnnString))
                     {

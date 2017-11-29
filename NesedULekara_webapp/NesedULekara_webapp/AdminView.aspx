@@ -12,6 +12,8 @@
         <br>
         <asp:Label ID="Label2" runat="server" Text="Email: "></asp:Label><asp:TextBox ID="doctorEmailTxb" runat="server" TextMode="Email"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq3" runat="server" ControlToValidate="doctorEmailTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%>
         <br>
+        <asp:Label ID="Label18" runat="server" Text="Prihlasovacie heslo: "></asp:Label><asp:TextBox ID="doctorPasswordTxb" runat="server"></asp:TextBox>
+        <br />
         <asp:Label ID="Label9" runat="server" Text="Telefonický kontakt: "></asp:Label><asp:TextBox ID="doctorTelephoneTxb" runat="server" TextMode="Phone"></asp:TextBox><%--<asp:RequiredFieldValidator ID="rq4" runat="server" ControlToValidate="doctorTelephoneTxb" ErrorMessage="Vložte hodnotu!" ForeColor="Red"></asp:RequiredFieldValidator>--%>
         <br>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
