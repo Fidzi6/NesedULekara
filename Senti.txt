@@ -1,0 +1,41 @@
+import numpy as np
+
+SentiWords = []
+NewSentiArr = []
+PosScore = 0
+NegScore = 0
+
+text_file = open("SentiWord", "r")
+SentiArr = text_file.read().split('\n')
+a  = len(SentiArr)
+for i in range(a):
+    SentiArr[i].split(' ')
+    NewSentiArr.append(SentiArr[i].split(' '))
+
+text_file = open("text.txt", "r")
+Text = text_file.read().split(' ')
+
+
+
+for i in range(len(Text)):
+    for j in range(len(NewSentiArr)):
+        if Text[i] == NewSentiArr[j][0]:
+            SentiWords.append(Text[i])
+            PosScore = PosScore + float(NewSentiArr[j][1])
+            NegScore = NegScore + float(NewSentiArr[j][2])
+            break
+
+print("PosScore je = ", PosScore)
+print("NegScore je = ", NegScore)
+ObjScore = 1 - (PosScore + NegScore)
+print("ObjScore", ObjScore)
+
+
+
+###for i in range(len(Text)):
+##    #print(i)
+##
+##for i in range(len(Text)):
+##    if any(Text[i] in s for s in SentiArr):
+##        SentiWords.append(Text[i])
+

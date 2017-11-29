@@ -1,0 +1,46 @@
+pom = 0
+lines = []
+Neg = []
+Pos = []
+Word = []
+Words = []
+PosScore = []
+NegScore = []
+ArrWord = []
+SentiWord = [] 
+text_file = open("senti.txt", "r")
+lines = text_file.readlines()
+
+for i in range(len(lines)):
+    for j in range(len(lines[i])):
+        
+        if lines[i][j+1] == '#':
+            pom = 0
+            break
+        
+        if lines[i][j] == '\t':
+            pom = pom +1
+        if pom == 2 and lines[i][j] != '\t':
+            Pos.append(lines[i][j])
+        if pom == 3 and lines[i][j] != '\t':
+            Neg.append(lines[i][j])
+        if pom == 4:
+            Word.append(lines[i][j+1])
+
+    Words.append(''.join(Word))
+    Word = []
+    PosScore.append(''.join(Pos))
+    Pos = []
+    NegScore.append(''.join(Neg))
+    Neg = []
+
+text_file = open("SentiWord", "w")
+for i in range(len(Words)):
+##    SentiWord.append(Words[i])
+##    SentiWord.append(PosScore[i])
+##    SentiWord.append(NegScore[i])
+    text_file.write(str(Words[i]) + " " + str(PosScore[i]) + " " + str(NegScore[i]) + "\n")
+        
+text_file.close()
+
+
