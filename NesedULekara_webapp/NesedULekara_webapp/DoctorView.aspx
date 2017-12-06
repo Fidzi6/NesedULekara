@@ -5,9 +5,8 @@
 
     <div class="jumbotron">
         lekar
-        <asp:Table ID="Table1" runat="server"></asp:Table>
-
-        <asp:GridView ID="GridView1" runat="server"></asp:GridView> <br>
+        <br>
+        <asp:PlaceHolder ID="PlaceHolder1" runat="server" />
         <br>
         <asp:Button ID="logout2Button" runat="server" Text="Odhlásiť sa" OnClick="logout2Button_Click" />
     </div>

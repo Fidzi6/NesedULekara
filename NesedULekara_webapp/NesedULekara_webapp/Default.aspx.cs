@@ -25,6 +25,7 @@ namespace NesedULekara_webapp
                 //get login and password from textboxs
                 string login = loginTextBox.Text;
                 string pass = passwordTextBox.Text;
+                Application["login"] = login;
 
                 //try to perform login - only if entered values are correct (login exists and password is good)
                 try

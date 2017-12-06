@@ -18,7 +18,7 @@ namespace NesedULekara_webapp
         private static string lat;
         private static string longit;
         //private static int c = 0;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             //načíta zoznam lekárskych zameraní z databázy - prečíta originálne zameranie už registrovaných lekárov
