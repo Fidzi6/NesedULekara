@@ -17,6 +17,8 @@ namespace NesedULekara_webapp
         {
             if (!this.IsPostBack)
             {
+                SqlDataSource1.SelectCommand = "SELECT * FROM dbo.[doctors] AS s WHERE s.email = '" + Application["login"].ToString() + "'";
+
                 //Populating a DataTable from database.
                 DataTable dt = this.GetData();
 
