@@ -46,7 +46,7 @@ namespace NesedLekar.Pages
             if(info!=null)
             {
                 nameTB.Text = info.Doctor.Name;
-                addressTB.Text = info.Doctor.Address;
+                addressTB.Text = info.Doctor.Adress;
                 departmentTB.Text = info.Doctor.Department;
                 dateTB.Text = info.Date;
                 timeTB.Text = info.Time;

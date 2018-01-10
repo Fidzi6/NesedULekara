@@ -35,6 +35,8 @@ namespace NesedLekar
 
             //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = Windows.Globalization.ApplicationLanguages.Languages[0];
             //string s = "";
+
+            DatabaseWork = new Database();
         }
 
         /// <summary>
@@ -121,8 +123,9 @@ namespace NesedLekar
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
-
-
+        
         public static MobileServiceClient MobileService = new MobileServiceClient("https://lekarmobile.azurewebsites.net");
+        public static Database DatabaseWork;
+        public static string Patient = string.Empty;
     }
 }

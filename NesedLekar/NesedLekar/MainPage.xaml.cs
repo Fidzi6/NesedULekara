@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Navigation;
 
 using NesedLekar.Pages;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,13 +32,32 @@ namespace NesedLekar
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {            
+        {
+            loginTB.Text = "";
+            passwordTB.Password = "";
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void loginBT_Click(object sender, RoutedEventArgs e)
+        private async void loginBT_Click(object sender, RoutedEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(CalendarPage), "login");
+            MessageDialog msgDialogError;
+            processPR.IsActive = true;
+            if (loginTB.Text != string.Empty || passwordTB.Password != string.Empty)
+            {
+                List<login> ll = await App.DatabaseWork.SelectAsync(loginTB.Text, passwordTB.Password);
+
+                if (ll != null && ll.Count > 0)
+                {
+                    App.Patient = loginTB.Text;
+                    (Window.Current.Content as Frame).Navigate(typeof(CalendarPage), "login");
+                }
+                else
+                {
+                    msgDialogError = new MessageDialog("Nesprávne prihlasovacie údaje!");
+                    await msgDialogError.ShowAsync();
+                }
+            }
+            processPR.IsActive = false;
         }
 
         private void regBT_Click(object sender, RoutedEventArgs e)

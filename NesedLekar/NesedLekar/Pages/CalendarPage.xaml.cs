@@ -38,9 +38,30 @@ namespace NesedLekar.Pages
                 Saver.AddInfo(e.Parameter as AppointmentInfo);
             else if (e.Parameter as string != null && (e.Parameter as string) == "login")
                 Saver.Clear();
-            
+
             //Saver.AddInfo(new AppointmentInfo(new DoctorItem("Fero", "Košice", "Chirurg", true), "20. 11. 2017", "9:10"));
             //Saver.AddInfo(new AppointmentInfo(new DoctorItem("Jana", "Prešov", "Detská", true), "10. 12. 2017", "19:10"));
+
+
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            processPR.IsActive = true;
+            List<patients> lp = await App.DatabaseWork.SelectAsynch(App.Patient);
+
+            if(lp?.Count>0)
+            {
+                List<AppointmentInfo> linfo = new List<AppointmentInfo>();
+
+                for (int i = 0; i < lp.Count; i++)
+                    linfo.Add(new AppointmentInfo(lp[i]));
+
+                appointmentLV.ItemsSource = linfo;
+            }
+
+            processPR.IsActive = false;
         }
 
         private void doctorAppBarButton_Click(object sender, RoutedEventArgs e)
@@ -50,7 +71,8 @@ namespace NesedLekar.Pages
 
         private void addAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            (Window.Current.Content as Frame).Navigate(typeof(AppointmentPage));
+            //(Window.Current.Content as Frame).Navigate(typeof(AppointmentPage));
+            (Window.Current.Content as Frame).Navigate(typeof(AppointmentDoctorPage));
         }
 
         private void Page_Loading(FrameworkElement sender, object args)
@@ -58,12 +80,12 @@ namespace NesedLekar.Pages
             //Nacitat z databazy / suboru ake objednania ma pacient
             //Odobrat zastarale
 
-            List<AppointmentInfo> linfo = new List<AppointmentInfo>();
+            //List<AppointmentInfo> linfo = new List<AppointmentInfo>();
 
-            for (int i = 0; i < Saver.Count; i++)
-                linfo.Add(Saver.GetInfo(i));
+            //for (int i = 0; i < Saver.Count; i++)
+            //    linfo.Add(Saver.GetInfo(i));
 
-            appointmentLV.ItemsSource = linfo;
+            //appointmentLV.ItemsSource = linfo;
 
             if (appointmentLV.Items.Count > 0)
                 noAppointmentTB.Visibility = Visibility.Collapsed;
@@ -74,6 +96,11 @@ namespace NesedLekar.Pages
         private void appointmentLV_ItemClick(object sender, ItemClickEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(DetailPage), e.ClickedItem);
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
         }
     }
 }

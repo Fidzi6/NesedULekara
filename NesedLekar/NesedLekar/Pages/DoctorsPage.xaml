@@ -43,7 +43,7 @@
                 </ListView.ItemTemplate>                
             </ListView>
             <TextBlock x:Name="noDoctorTB" Grid.Row="2" Margin="20" Text="Žiadny Lekár" FontStyle="Italic"/>
-            <ProgressRing Grid.Row="2" IsActive="False"/>
+            <ProgressRing x:Name="processPR" Grid.Row="2" IsActive="False" Width="100" Height="100"/>
         </Grid>        
     </Grid>
 </Page>

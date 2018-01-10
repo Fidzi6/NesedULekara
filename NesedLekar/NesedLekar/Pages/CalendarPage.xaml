@@ -28,20 +28,21 @@
                             </StackPanel>
                             <StackPanel Margin="10,0,0,0" Orientation="Vertical">
                                 <TextBlock Margin="10,0,0,0" Text="{x:Bind Doctor.Name}"/>
-                                <TextBlock Text="{x:Bind Doctor.Address}"/>
+                                <TextBlock Text="{x:Bind Doctor.Adress}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <TextBlock x:Name="noAppointmentTB" Grid.Row="2" Margin="20" Text="Žiadne objednanie" FontStyle="Italic"/>
-            <ProgressRing Grid.Row="2" IsActive="False"/>
+            <ProgressRing x:Name="processPR" Grid.Row="2" IsActive="False" Height="100" Width="100"/>
         </Grid>
         <CommandBar VerticalAlignment="Bottom">
             <AppBarButton Icon="Add" AutomationProperties.HelpText="" Label="Objednať" Click="addAppBarButton_Click"></AppBarButton>
-            <AppBarButton Icon="Contact" Label="Lekári" Click="doctorAppBarButton_Click"></AppBarButton>
+            <AppBarButton Icon="Contact" Label="Lekári" Click="doctorAppBarButton_Click"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Setting" Label="Nastavenia"/>
+                <AppBarButton Icon="Back" Label="Odhlásiť" Click="AppBarButton_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Grid>

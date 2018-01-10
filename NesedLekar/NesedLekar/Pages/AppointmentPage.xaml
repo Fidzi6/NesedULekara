@@ -36,7 +36,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <TextBlock x:Name="noCityTB" Grid.Row="2" Margin="20" Text="Žiadne Mesto" FontStyle="Italic" HorizontalAlignment="Center"/>
-            <ProgressRing x:Name="processPR" Grid.Row="2" IsActive="False"/>
+            <ProgressRing x:Name="processPR" Grid.Row="2" IsActive="False" Height="100" Width="100"/>
         </Grid>        
     </Grid>
 </Page>

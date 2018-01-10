@@ -25,7 +25,7 @@
             </Grid>
             <MenuFlyoutSeparator Grid.Row="1" VerticalAlignment="Bottom"/>
             <StackPanel Margin="0,10,0,20" Grid.Row="2" Orientation="Horizontal">
-                <ComboBox x:Name="oddelenieCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="200" SelectedIndex="0" >
+                <ComboBox x:Name="departmentCB" Margin="10,0,0,0" Header="Oddelenie" MaxWidth="200" SelectedIndex="0" SelectionChanged="departmentCB_SelectionChanged">
                     <ComboBoxItem Content="Všetky oddelenia"></ComboBoxItem>
                 </ComboBox>
             </StackPanel>
@@ -44,7 +44,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <TextBlock x:Name="noDoctorTB" Grid.Row="3" Margin="20" Text="Žiadny Lekár" FontStyle="Italic" HorizontalAlignment="Center"/>
-            <ProgressRing Grid.Row="3" IsActive="False"/>
+            <ProgressRing x:Name="processPR" Grid.Row="3" IsActive="False" Width="100" Height="100"/>
         </Grid>
     </Grid>
 </Page>

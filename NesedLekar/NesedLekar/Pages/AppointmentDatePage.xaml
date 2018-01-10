@@ -30,7 +30,7 @@
                 
             </ListView>
             <TextBlock x:Name="noDateTB" Grid.Row="3" Margin="20" Text="Žiadny voľný čas" FontStyle="Italic" HorizontalAlignment="Center"/>
-            <ProgressRing Grid.Row="3" IsActive="False"/>
+            <ProgressRing x:Name="processPR" Grid.Row="3" IsActive="False" Width="100" Height="100"/>
         </Grid>
     </Grid>
 </Page>

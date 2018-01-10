@@ -20,14 +20,15 @@
             </StackPanel>
             <ScrollViewer Grid.Row="1">
                 <StackPanel Orientation="Vertical">
-                    <TextBox  Margin="10,10,10,10" Text="" Header="Prihlasovacie meno :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <TextBox x:Name="loginTB" Margin="10,10,10,10" Text="" Header="Prihlasovacie meno :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
                     <MenuFlyoutSeparator></MenuFlyoutSeparator>
-                    <PasswordBox  Margin="10,10,10,0" Header="Heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
-                    <PasswordBox  Margin="10,10,10,0" Header="Znovu heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <PasswordBox x:Name="passTB" Margin="10,10,10,0" Header="Heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
+                    <PasswordBox x:Name="passCheckTB" Margin="10,10,10,0" Header="Znovu heslo :" FontFamily="Times New Roman" FontSize="18" MaxWidth="500"/>
                     <StackPanel Orientation="Horizontal" Margin="10,10,10,10" MaxWidth="125">
                         <Button x:Name="okBT" Content="Ok" Click="okBT_Click"/>
                         <Button x:Name="stornoBT" Content="Storno" Margin="10,0,0,0" Click="stornoBT_Click"/>
                     </StackPanel>
+                    <ProgressRing x:Name="processPR" IsActive="False" Height="100" Width="100"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,9 +43,39 @@ namespace NesedLekar.Pages
             this.Frame.GoBack();
         }
 
-        private void okBT_Click(object sender, RoutedEventArgs e)
+        private async void okBT_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageDialog msgDialogError;
+            processPR.IsActive = true;
+            if (passTB.Password == passCheckTB.Password)
+            {
+                login l = new login();
+
+                l.nick = loginTB.Text;
+                l.pass = passTB.Password;
+                l.rights = 3;
+
+
+                List<login> ll = await App.DatabaseWork.SelectAsync(l.nick);
+
+                if (ll?.Count == 0)
+                {
+                    App.DatabaseWork.InsertRow(l);
+
+                    this.Frame.GoBack();
+                }
+                else
+                {
+                    msgDialogError = new MessageDialog("Zadané meno už existuje!");
+                    await msgDialogError.ShowAsync();
+                }
+            }
+            else
+            {
+                msgDialogError = new MessageDialog("Heslá sa nezhodujú!");
+                await msgDialogError.ShowAsync();
+            }
+            processPR.IsActive = false;
         }
     }
 }

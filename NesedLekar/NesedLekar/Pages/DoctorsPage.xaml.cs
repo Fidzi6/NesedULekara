@@ -28,14 +28,29 @@ namespace NesedLekar.Pages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+            processPR.IsActive = true;
+            var ld = await App.DatabaseWork.AllDoctors();
+
+            var nld = ld.ToList();
+
+            if (nld?.Count > 0)
+                for (int i = 0; i < nld.Count; i++)
+                    listLV.Items.Add(new DoctorItem(nld[i], true));
+
+            if (listLV.Items.Count > 0)
+                noDoctorTB.Visibility = Visibility.Collapsed;
+            else
+                noDoctorTB.Visibility = Visibility.Visible;
+            processPR.IsActive = false;
         }
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            listLV.ItemsSource = new List<DoctorItem>() { new DoctorItem("Jana", "Prešov", "Vseobecny", false), new DoctorItem("Fero", "Poprad", "Chirurg", true) };
+            //listLV.ItemsSource = new List<DoctorItem>() { new DoctorItem("Jana", "Prešov", "Vseobecny", false), new DoctorItem("Fero", "Poprad", "Chirurg", true) };
 
             RefreshDoctors();
         }

@@ -37,8 +37,8 @@ namespace NesedLekar.Pages
                 Paragraph p = new Paragraph();
                 Run r = new Run();
 
-                nameTB.Text = comment.Name;
-                dateTB.Text = comment.Date + " " + comment.Time;
+                nameTB.Text = comment.PatientName;
+                dateTB.Text = comment.DateTime;
 
                 r.Text = comment.FullText;
                 p.Inlines.Add(r);

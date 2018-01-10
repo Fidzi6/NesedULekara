@@ -37,7 +37,7 @@ namespace NesedLekar.Pages
         {
             infos.Clear();
         }
-        
+
         public static void AddInfo(AppointmentInfo info)
         {
             if (!infos.Contains(info))
@@ -81,22 +81,29 @@ namespace NesedLekar.Pages
 
     public class DoctorItem
     {
-        private string name;
-        private string address;
-        private string dep;
+        private doctors doctor;
+
+
+        //private string name;
+        //private string address;
+        //private string dep;
         private string img;
 
-        public string Name { get => name; set => name = value; }
-        public string Address { get => address; set => address = value; }
-        public string Department { get => dep; set => dep = value; }
+        //public string Name { get => name; set => name = value; }
+        //public string Address { get => address; set => address = value; }
+        //public string Department { get => dep; set => dep = value; }
         public string Img { get => img; }
 
-        public DoctorItem(string name, string address, string department, bool male)
-        {
-            this.name = name;
-            this.address = address;
-            this.dep = department;
+        public string Name { get => doctor.name + " " + doctor.surname; }
+        public string Email { get => doctor.email; }
+        public string Department { get => doctor.specialization; }
+        public string Phone { get => doctor.tel; }
+        public string Adress { get => doctor.adress; }
 
+
+        public DoctorItem(doctors doctor, bool male)
+        {
+            this.doctor = doctor;
             if (male)
                 this.img = "ms-appx:///Assets/doctorM.png";
             else
@@ -106,42 +113,71 @@ namespace NesedLekar.Pages
 
     public class CommentInfo
     {
-        private string fullText;
-        private string name;
-        private string date;
-        private string time;
+        private comments comment;
 
-        public string FullText { get => fullText; set => fullText = value; }
-        public string Name { get => name; set => name = value; }
-        public string Date { get { return "(" + date + ")"; } set { date = value; } }
-        public string Time { get => time; set => time = value; }
+        //private string fullText;
+        //private string name;
+        //private string date;
+        //private string time;
 
-        public CommentInfo(string fullText, string name, string date, string time)
+        //public string FullText { get => fullText; set => fullText = value; }
+        //public string Name { get => name; set => name = value; }
+        //public string Date { get { return "(" + date + ")"; } set { date = value; } }
+        //public string Time { get => time; set => time = value; }
+
+        public string FullText { get => comment.comment; }
+        public string PatientName { get => comment.patient_name; }
+        public string DateTime { get => comment.date+" ("+comment.time+")"; }
+
+        public CommentInfo(comments comment)
         {
-            this.fullText = fullText;
-            this.name = name;
-            this.date = date;
-            this.time = time;
+            this.comment = comment;
+
+            //this.fullText = fullText;
+            //this.name = name;
+            //this.date = date;
+            //this.time = time;
         }
     }
 
     public class AppointmentInfo
     {
         private DoctorItem doctor;
+        private string email;
         private string date;
         private string time;
         //private DateTime dateDT;
 
-        public DoctorItem Doctor { get => doctor; }
+
+
+        public DoctorItem Doctor { get
+            {
+                if (doctor != null)
+                    return doctor;
+                else
+                {
+                    return GetDoctor().Result;
+                }
+            }
+        }
         public string Date { get => date; }
         public string Time { get => time; }
         //public DateTime DateDT { get => dateDT; }
+
+        public AppointmentInfo(patients patient)
+        {
+            doctor = null;
+            email = patient.doctor;
+            date = patient.date;
+            time = patient.time;
+        }
 
         public AppointmentInfo(DoctorItem doctor, string date, string time)
         {
             //string[] sd, st;
 
             this.doctor = doctor;
+            email = doctor.Email;
             this.date = date;
             this.time = time;
 
@@ -149,8 +185,33 @@ namespace NesedLekar.Pages
             //st = time.Split(':');
 
             //if (sd.Length > 2 && st.Length > 1)
-                
 
+
+        }
+
+        public patients GetInstance()
+        {
+            patients p = new patients();
+
+            //patient name - from app - get actual patient login 
+            p.doctor = doctor.Email;
+            p.date = date;
+            p.time = time;
+
+            return p;
+
+        }
+
+        private async Task<DoctorItem> GetDoctor()
+        {
+            List<doctors> ld = null;
+
+            ld = await App.DatabaseWork.SelectAsynchDoc(email);
+
+            if (ld?.Count > 0)
+                return new DoctorItem(ld[0], true);
+            else
+                return null;
         }
     }
 }

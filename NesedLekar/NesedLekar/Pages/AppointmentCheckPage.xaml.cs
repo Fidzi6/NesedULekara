@@ -36,7 +36,7 @@ namespace NesedLekar.Pages
                 info = e.Parameter as AppointmentInfo;
 
                 doctorTB.Text = info.Doctor.Name;
-                addressTB.Text = info.Doctor.Address;
+                addressTB.Text = info.Doctor.Adress;
                 dateTB.Text = info.Date;
                 timeTB.Text = info.Time;
             }

@@ -28,6 +28,7 @@
                         <Button x:Name="loginBT" Content="Prihlásiť" Click="loginBT_Click"/>
                         <Button x:Name="regBT" Content="Registrácia" Click="regBT_Click" Margin="10,0,0,0"/>
                     </StackPanel>
+                    <ProgressRing x:Name="processPR" IsActive="False" Height="100" Width="100"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

@@ -31,7 +31,7 @@ namespace NesedLekar.Pages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
@@ -39,7 +39,7 @@ namespace NesedLekar.Pages
             if (doctor != null)
             {
                 nameTB.Text = doctor.Name;
-                addressTB.Text = doctor.Address;
+                addressTB.Text = doctor.Adress;
                 departmentTB.Text = doctor.Department;
 
                 if (doctor.Img != null && doctor.Img != string.Empty)
@@ -48,19 +48,32 @@ namespace NesedLekar.Pages
                         img.Source = new BitmapImage(new Uri(doctor.Img));
                     }
                     catch (Exception) { img.Source = new BitmapImage(new Uri("ms-appx:///Assets/doctorM.png")); }
+
+
+                processPR.IsActive = true;
+                var ld = await App.DatabaseWork.SelectAsynchC(doctor.Email);
+
+                var nld = ld.ToList();
+
+                if (nld?.Count > 0)
+                    for (int i = 0; i < nld.Count; i++)
+                        listLV.Items.Add(new CommentInfo(nld[i]));
+                
+                if (listLV.Items.Count > 0)
+                    noCommentTB.Visibility = Visibility.Collapsed;
+                else
+                    noCommentTB.Visibility = Visibility.Visible;
+                processPR.IsActive = false;
             }
         }
 
         private void Grid_Loading(FrameworkElement sender, object args)
         {
-            listLV.Items.Add(new CommentInfo("dobrý.", "Laci", "01.01.2007", "10:00"));
-            listLV.Items.Add(new CommentInfo("Ta to ten doktor sa nezdá.", "Peťo", "01.05.2007", "08:00"));
-            listLV.Items.Add(new CommentInfo("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuudddddddddddddddskfjsdlkfjsdklfjsdlfjldksfjklsdvbnsdlneiopnavlsenvlkashnerfnsdlkvnaeivn laejhifsdgklvjhaeiovn aiocfhnvlskhnvl ksdbhofhedvn klwehsfue", "Peťo", "01.05.2007", "08:00"));
+            //listLV.Items.Add(new CommentInfo("dobrý.", "Laci", "01.01.2007", "10:00"));
+            //listLV.Items.Add(new CommentInfo("Ta to ten doktor sa nezdá.", "Peťo", "01.05.2007", "08:00"));
+            //listLV.Items.Add(new CommentInfo("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuudddddddddddddddskfjsdlkfjsdklfjsdlfjldksfjklsdvbnsdlneiopnavlsenvlkashnerfnsdlkvnaeivn laejhifsdgklvjhaeiovn aiocfhnvlskhnvl ksdbhofhedvn klwehsfue", "Peťo", "01.05.2007", "08:00"));
 
-            if (listLV.Items.Count > 0)
-                noCommentTB.Visibility = Visibility.Collapsed;
-            else
-                noCommentTB.Visibility = Visibility.Visible;
+            
         }
 
         private void listLV_ItemClick(object sender, ItemClickEventArgs e)
@@ -71,6 +84,11 @@ namespace NesedLekar.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePage), doctor);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

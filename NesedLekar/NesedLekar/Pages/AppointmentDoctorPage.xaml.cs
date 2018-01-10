@@ -27,6 +27,24 @@ namespace NesedLekar.Pages
             this.InitializeComponent();
         }
 
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            processPR.IsActive = true;
+            var ld = await App.DatabaseWork.AllDoctors();
+
+            var nld = ld.ToList();
+
+            if (nld?.Count > 0)
+                for (int i = 0; i < nld.Count; i++)
+                    listLV.Items.Add(new DoctorItem(nld[i], true));
+
+            if (listLV.Items.Count > 0)
+                noDoctorTB.Visibility = Visibility.Collapsed;
+            else
+                noDoctorTB.Visibility = Visibility.Visible;
+            processPR.IsActive = false;
+        }
+
         private void listLV_ItemClick(object sender, ItemClickEventArgs e)
         {
             (Window.Current.Content as Frame).Navigate(typeof(AppointmentDatePage), e.ClickedItem);
@@ -34,13 +52,15 @@ namespace NesedLekar.Pages
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            listLV.Items.Add(new DoctorItem("Fero", "Košice", "Chirurg", true));
-            listLV.Items.Add(new DoctorItem("Jana", "Prešov", "Všeobecny", false));
+            //listLV.Items.Add(new DoctorItem("Fero", "Košice", "Chirurg", true));
+            //listLV.Items.Add(new DoctorItem("Jana", "Prešov", "Všeobecny", false));
 
-            if (listLV.Items.Count > 0)
-                noDoctorTB.Visibility = Visibility.Collapsed;
-            else
-                noDoctorTB.Visibility = Visibility.Visible;
+            
+        }
+
+        private void departmentCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
