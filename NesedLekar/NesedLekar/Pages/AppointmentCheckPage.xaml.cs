@@ -35,10 +35,13 @@ namespace NesedLekar.Pages
             {
                 info = e.Parameter as AppointmentInfo;
 
-                doctorTB.Text = info.Doctor.Name;
-                addressTB.Text = info.Doctor.Adress;
+                doctorTB.Text = info.Doctor;
+                addressTB.Text = info.Adress;
                 dateTB.Text = info.Date;
                 timeTB.Text = info.Time;
+
+
+                info.Row[info.Index] = App.Patient;
             }
             else
                 info = null;
@@ -46,6 +49,15 @@ namespace NesedLekar.Pages
 
         private void okAppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            patients p = new patients();
+            p.date = info.Row.date;
+            p.time = info.Time;
+            p.patient = App.Patient;
+            p.doctor = info.Row.doktor;
+
+            App.DatabaseWork.InsertRow(info.Row);
+            App.DatabaseWork.InsertRow(p);
+            
             (Window.Current.Content as Frame).Navigate(typeof(CalendarPage), info);
         }
 

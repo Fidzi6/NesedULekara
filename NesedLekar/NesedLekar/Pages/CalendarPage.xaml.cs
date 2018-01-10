@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -44,24 +45,31 @@ namespace NesedLekar.Pages
 
 
             LoadData();
+
+            e.ToString();
         }
 
-        private async void LoadData()
+        private async Task<bool> LoadData()
         {
             processPR.IsActive = true;
             List<patients> lp = await App.DatabaseWork.SelectAsynch(App.Patient);
 
             if(lp?.Count>0)
             {
-                List<AppointmentInfo> linfo = new List<AppointmentInfo>();
+                List<Order> linfo = new List<Order>();
 
                 for (int i = 0; i < lp.Count; i++)
-                    linfo.Add(new AppointmentInfo(lp[i]));
+                    linfo.Add(new Order(lp[i]));
 
                 appointmentLV.ItemsSource = linfo;
             }
 
+            if (appointmentLV.Items.Count > 0)
+                noAppointmentTB.Visibility = Visibility.Collapsed;
+            else
+                noAppointmentTB.Visibility = Visibility.Visible;
             processPR.IsActive = false;
+            return true;
         }
 
         private void doctorAppBarButton_Click(object sender, RoutedEventArgs e)
@@ -100,7 +108,7 @@ namespace NesedLekar.Pages
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.GoBack();
+            (Window.Current.Content as Frame).Navigate(typeof(MainPage));
         }
     }
 }

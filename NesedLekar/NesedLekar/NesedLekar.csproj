@@ -11,7 +11,7 @@
     <AssemblyName>NesedLekar</AssemblyName>
     <DefaultLanguage>sk-SK</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -107,6 +107,9 @@
     <Compile Include="Pages\AppointmentDoctorPage.xaml.cs" />
     <Compile Include="Pages\AppointmentPage.xaml.cs" />
     <Compile Include="Pages\CalendarPage.xaml.cs" />
+    <Compile Include="Pages\CommentAddPage.xaml.cs">
+      <DependentUpon>CommentAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CommentPage.xaml.cs" />
     <Compile Include="Pages\DetailPage.xaml.cs" />
     <Compile Include="Pages\DoctorPage.xaml.cs" />
@@ -163,6 +166,10 @@
     <Page Include="Pages\CalendarPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CommentAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentPage.xaml">
       <Generator>MSBuild:Compile</Generator>

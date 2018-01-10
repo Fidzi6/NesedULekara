@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -49,22 +50,27 @@ namespace NesedLekar.Pages
                     }
                     catch (Exception) { img.Source = new BitmapImage(new Uri("ms-appx:///Assets/doctorM.png")); }
 
-
-                processPR.IsActive = true;
-                var ld = await App.DatabaseWork.SelectAsynchC(doctor.Email);
-
-                var nld = ld.ToList();
-
-                if (nld?.Count > 0)
-                    for (int i = 0; i < nld.Count; i++)
-                        listLV.Items.Add(new CommentInfo(nld[i]));
-                
-                if (listLV.Items.Count > 0)
-                    noCommentTB.Visibility = Visibility.Collapsed;
-                else
-                    noCommentTB.Visibility = Visibility.Visible;
-                processPR.IsActive = false;
+                LoadData();                
             }
+        }
+
+        private async Task<bool> LoadData()
+        {
+            processPR.IsActive = true;
+            var ld = await App.DatabaseWork.SelectAsynchC(doctor.Email);
+
+            var nld = ld.ToList();
+
+            if (nld?.Count > 0)
+                for (int i = 0; i < nld.Count; i++)
+                    listLV.Items.Add(new CommentInfo(nld[i]));
+
+            if (listLV.Items.Count > 0)
+                noCommentTB.Visibility = Visibility.Collapsed;
+            else
+                noCommentTB.Visibility = Visibility.Visible;
+            processPR.IsActive = false;
+            return true;
         }
 
         private void Grid_Loading(FrameworkElement sender, object args)
@@ -88,7 +94,7 @@ namespace NesedLekar.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            (Window.Current.Content as Frame).Navigate(typeof(CommentAddPage), doctor);
         }
     }
 }

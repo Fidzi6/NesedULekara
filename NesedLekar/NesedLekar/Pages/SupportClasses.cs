@@ -82,8 +82,7 @@ namespace NesedLekar.Pages
     public class DoctorItem
     {
         private doctors doctor;
-
-
+        
         //private string name;
         //private string address;
         //private string dep;
@@ -100,6 +99,9 @@ namespace NesedLekar.Pages
         public string Phone { get => doctor.tel; }
         public string Adress { get => doctor.adress; }
 
+        public string StartOrdinary { get => doctor.start; }
+        public string EndOrdinary { get => doctor.superEnd; }
+        public string Interval { get => doctor.interval; }
 
         public DoctorItem(doctors doctor, bool male)
         {
@@ -126,6 +128,29 @@ namespace NesedLekar.Pages
         //public string Time { get => time; set => time = value; }
 
         public string FullText { get => comment.comment; }
+        public string Comment
+        {
+            get
+            {
+                string[] ss;
+                if (comment.comment != null && comment.comment != string.Empty && comment.comment.Length > 50)
+                {
+                    ss = comment.comment.Split('\r');
+                    if (ss.Length > 3)
+                        return ss[0] + "\r" + ss[1] + "\r...";
+                    else
+                        return comment.comment.Substring(0, 50) + "...";
+                }
+                else
+                {
+                    ss = comment.comment.Split('\r');
+                    if (ss.Length > 3)
+                        return ss[0] + "\r" + ss[1] + "\r...";
+                    else
+                        return comment.comment;
+                }
+            }
+        }
         public string PatientName { get => comment.patient_name; }
         public string DateTime { get => comment.date+" ("+comment.time+")"; }
 
@@ -140,78 +165,94 @@ namespace NesedLekar.Pages
         }
     }
 
-    public class AppointmentInfo
+    public class Order
     {
+        private patients order;
         private DoctorItem doctor;
-        private string email;
-        private string date;
-        private string time;
-        //private DateTime dateDT;
+        private bool ok;
+        
+        public DoctorItem Doctor { get { if (ok) return doctor; else return null; } }
+        public string Date { get => order.date; }
+        public string Time { get => order.time; }
 
 
+        public Order(patients patient)
+        {
+            ok = false;
+            order = patient;
+            Task t = new Task(() => Work(patient.doctor));
+            t.Start();
+            t.Wait();
 
-        public DoctorItem Doctor { get
-            {
-                if (doctor != null)
-                    return doctor;
-                else
-                {
-                    return GetDoctor().Result;
-                }
-            }
         }
-        public string Date { get => date; }
+
+        private void Work(string doctor)
+        {
+            var x = App.DatabaseWork.SelectAsynchDoc(doctor);
+            x.Wait();
+            if (x.Result?.Count > 0)
+                this.doctor = new DoctorItem(x.Result[0], true);
+            else
+                this.doctor = null;
+            ok = true;
+        }
+    }
+
+    public class AppointmentInfo
+    {        
+        private DoktoriIntervals interval;
+        private DoctorItem doctor;
+        private string time;
+        private int index;
+
+        public string Date { get => interval.date; }
         public string Time { get => time; }
+        public string Doctor { get => doctor.Name; }
+        public string Adress { get => doctor.Adress; }
+        public DoktoriIntervals Row { get => interval; }
+        public int Index { get => index; }
+
         //public DateTime DateDT { get => dateDT; }
 
-        public AppointmentInfo(patients patient)
-        {
-            doctor = null;
-            email = patient.doctor;
-            date = patient.date;
-            time = patient.time;
-        }
+        //public AppointmentInfo(patients patient)
+        //{
+        //    interval = null;
+        //    email = patient.doctor;
+        //    time = patient.time;
 
-        public AppointmentInfo(DoctorItem doctor, string date, string time)
-        {
-            //string[] sd, st;
+        //}
 
+        public AppointmentInfo(DoctorItem doctor, DoktoriIntervals row, string time, int index)
+        {
+            interval = row;
             this.doctor = doctor;
-            email = doctor.Email;
-            this.date = date;
             this.time = time;
-
-            //sd = date.Split('.');
-            //st = time.Split(':');
-
-            //if (sd.Length > 2 && st.Length > 1)
-
-
+            this.index = index;
         }
 
-        public patients GetInstance()
-        {
-            patients p = new patients();
+        //public patients GetInstance()
+        //{
+        //    patients p = new patients();
 
-            //patient name - from app - get actual patient login 
-            p.doctor = doctor.Email;
-            p.date = date;
-            p.time = time;
+        //    //patient name - from app - get actual patient login 
+        //    p.doctor = doctor.Email;
+        //    p.date = interval.date;
+        //    p.time = time;
 
-            return p;
+        //    return p;
 
-        }
+        //}
 
-        private async Task<DoctorItem> GetDoctor()
-        {
-            List<doctors> ld = null;
+        //private async Task<DoctorItem> GetDoctor()
+        //{
+        //    List<doctors> ld = null;
 
-            ld = await App.DatabaseWork.SelectAsynchDoc(email);
+        //    ld = await App.DatabaseWork.SelectAsynchDoc(email);
 
-            if (ld?.Count > 0)
-                return new DoctorItem(ld[0], true);
-            else
-                return null;
-        }
+        //    if (ld?.Count > 0)
+        //        return new DoctorItem(ld[0], true);
+        //    else
+        //        return null;
+        //}
     }
 }

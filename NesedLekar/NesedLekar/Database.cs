@@ -24,31 +24,36 @@ namespace NesedLekar
             tablePatients = App.MobileService.GetTable<patients>();
             tableIntervals = App.MobileService.GetTable<DoktoriIntervals>();
         }
-        
-        public void InsertRow(login login)
+
+        #region Insert
+        public async void InsertRow(login login)
         {
-            tableLogin.InsertAsync(login);
+            await tableLogin.InsertAsync(login);
         }
 
-        public void InsertRow(doctors doctor)
+        public async void InsertRow(doctors doctor)
         {
-            tableDoctors.InsertAsync(doctor);
+            await tableDoctors.InsertAsync(doctor);
         }
 
-        public void InsertRow(patients patient)
+        public async void InsertRow(patients patient)
         {
-            tablePatients.InsertAsync(patient);
+            await tablePatients.InsertAsync(patient);
         }
 
-        public void InsertRow(comments comment)
+        public async void InsertRow(comments comment)
         {
-            tableComments.InsertAsync(comment);
+            await tableComments.InsertAsync(comment);
         }
 
-        public void InsertRow(DoktoriIntervals doctorInterval)
+        public async void InsertRow(DoktoriIntervals doctorInterval)
         {
-            tableIntervals.InsertAsync(doctorInterval);
+            if (doctorInterval.id != null && doctorInterval.id != string.Empty)
+                await tableIntervals.UpdateAsync(doctorInterval);
+            else
+                await tableIntervals.InsertAsync(doctorInterval);
         }
+        #endregion
 
         public async Task<List<login>> SelectAsync(string login, string pass)
         {
@@ -76,13 +81,18 @@ namespace NesedLekar
         }
 
         public async Task<List<comments>> SelectAsynchC(string doctor)
-        {
+        {            
             return await tableComments.Where(x => x.doctor_name == doctor).ToListAsync();
         }
 
         public async Task<List<DoktoriIntervals>> SelectAsynch(patients order)
         {
             return await tableIntervals.Where(x => x.doktor == order.doctor && x.date==order.date).ToListAsync();
+        }
+
+        public async Task<List<DoktoriIntervals>> SelectAsynch(string doctor, string date)
+        {
+            return await tableIntervals.Where(x => x.doktor == doctor && x.date == date).ToListAsync();
         }
 
         public async Task<IEnumerable<doctors>> AllDoctors()

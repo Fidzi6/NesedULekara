@@ -88,5 +88,101 @@ namespace NesedLekar
         public string i23 { get; set; }
         public string i24 { get; set; }
         public string i25 { get; set; }
+
+        public string this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0: return i1;
+                    case 1: return i2;
+                    case 2: return i3;
+                    case 3: return i4;
+                    case 4: return i5;
+                    case 5: return i6;
+                    case 6: return i7;
+                    case 7: return i8;
+                    case 8: return i9;
+                    case 9: return i10;
+                    case 10: return i11;
+                    case 11: return i12;
+                    case 12: return i13;
+                    case 13: return i14;
+                    case 14: return i15;
+                    case 15: return i16;
+                    case 16: return i17;
+                    case 17: return i18;
+                    case 18: return i19;
+                    case 19: return i20;
+                    case 20: return i21;
+                    case 21: return i22;
+                    case 22: return i23;
+                    case 23: return i24;
+                    case 24: return i25;
+                    default: return string.Empty;
+                }
+            }
+            set
+            {
+                switch (index)
+                {
+                    case 0: i1 = value; break;
+                    case 1: i2 = value; break;
+                    case 2: i3 = value; break;
+                    case 3: i4 = value; break;
+                    case 4: i5 = value; break;
+                    case 5: i6 = value; break;
+                    case 6: i7 = value; break;
+                    case 7: i8 = value; break;
+                    case 8: i9 = value; break;
+                    case 9: i10 = value; break;
+                    case 10: i11 = value; break;
+                    case 11: i12 = value; break;
+                    case 12: i13 = value; break;
+                    case 13: i14 = value; break;
+                    case 14: i15 = value; break;
+                    case 15: i16 = value; break;
+                    case 16: i17 = value; break;
+                    case 17: i18 = value; break;
+                    case 18: i19 = value; break;
+                    case 19: i20 = value; break;
+                    case 20: i21 = value; break;
+                    case 21: i22 = value; break;
+                    case 22: i23 = value; break;
+                    case 23: i24 = value; break;
+                    case 24: i25 = value; break;
+                }
+            }
+        }
+
+        public DoktoriIntervals()
+        {
+            i1 = "-";
+            i2 = "-";
+            i3 = "-";
+            i4 = "-";
+            i5 = "-";
+            i6 = "-";
+            i7 = "-";
+            i8 = "-";
+            i9 = "-";
+            i10 = "-";
+            i11 = "-";
+            i12 = "-";
+            i13 = "-";
+            i14 = "-";
+            i15 = "-";
+            i16 = "-";
+            i17 = "-";
+            i18 = "-";
+            i19 = "-";
+            i20 = "-";
+            i21 = "-";
+            i22 = "-";
+            i23 = "-";
+            i24 = "-";
+            i25 = "-";
+        }
     }
 }

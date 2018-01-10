@@ -24,7 +24,7 @@ namespace NesedLekar.Pages
     /// </summary>
     public sealed partial class DetailPage : Page
     {
-        private AppointmentInfo info;
+        private Order info;
 
         public DetailPage()
         {
@@ -35,8 +35,8 @@ namespace NesedLekar.Pages
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
-            if (e.Parameter as AppointmentInfo != null)
-                info = e.Parameter as AppointmentInfo;
+            if (e.Parameter as Order != null)
+                info = e.Parameter as Order;
             else
                 info = null;
         }
