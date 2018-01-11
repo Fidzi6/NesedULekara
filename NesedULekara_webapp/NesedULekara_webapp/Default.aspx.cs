@@ -15,90 +15,23 @@ namespace NesedULekara_webapp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            //using (SqlConnection conn = new SqlConnection(cnnString))
-            //{
-            //    using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[TestLogin] (login, password, rights) VALUES (@c1, @c2, @c3)", conn))
-            //    {
-            //        cmd.Parameters.AddWithValue("@c1", "feri"); //name
-            //        cmd.Parameters.AddWithValue("@c2", "feri10"); //surname
-            //        cmd.Parameters.AddWithValue("@c3", 2); //email
-            //        conn.Open();
-            //        cmd.ExecuteNonQuery();
-            //        conn.Close();
-            //    }
-            //}
-
-
-
-
-            //Test
-            //write new doctor data to table dbo.doctors
-
-        //    try
-        //    {
-        //        string message = string.Empty;
-        //        var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        //        using (SqlConnection conn = new SqlConnection(cnnString))
-        //        {
-        //            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO dbo.[doctors] (name, surname, email, specialization, tel, adress, latitude, longtude, emergency, lunch, start, interval, rating, superEnd) VALUES (@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @c10, @c11, @c12, @c13, @c14)", conn))
-        //            {
-        //                cmd.Parameters.AddWithValue("@c1", "DoktorMeno"); //name
-        //                cmd.Parameters.AddWithValue("@c2", "DoktorMeno2"); //surname
-        //                cmd.Parameters.AddWithValue("@c3", "emilX"); //email
-        //                cmd.Parameters.AddWithValue("@c4", "special"); //function
-        //                cmd.Parameters.AddWithValue("@c5", "095059"); //tel
-        //                cmd.Parameters.AddWithValue("@c6", "ke" + ", " + "ff"); //adress
-        //                cmd.Parameters.AddWithValue("@c7", "54654"); //latitude
-        //                cmd.Parameters.AddWithValue("@c8", "456456"); //longitude
-        //                cmd.Parameters.AddWithValue("@c9", "9"); //emergency
-        //                cmd.Parameters.AddWithValue("@c10", "12"); //lunch
-        //                cmd.Parameters.AddWithValue("@c11", "7"); //lunch
-        //                cmd.Parameters.AddWithValue("@c12", "3"); //lunch
-        //                cmd.Parameters.AddWithValue("@c13", "30"); //lunch
-        //                cmd.Parameters.AddWithValue("@c14", "10");
-        //                conn.Open();
-        //                cmd.ExecuteNonQuery();
-        //                conn.Close();
-        //            }
-        //        }
-
-        //        //write login and password to table dbo.login
-        //        using (SqlConnection conn = new SqlConnection(cnnString))
-        //        {
-        //            int userId = 0;
-        //            using (SqlCommand cmd = new SqlCommand("login_user"))
-        //            {
-        //                using (SqlDataAdapter sda = new SqlDataAdapter())
-        //                {
-        //                    cmd.CommandType = CommandType.StoredProcedure;
-        //                    cmd.Parameters.AddWithValue("@login", "emil15415@g.sk");
-        //                    cmd.Parameters.AddWithValue("@password", "heslo");
-        //                    cmd.Parameters.AddWithValue("@rights", 2);
-        //                    cmd.Connection = conn;
-        //                    conn.Open();
-        //                    userId = Convert.ToInt32(cmd.ExecuteScalar());
-        //                    conn.Close();
-        //                }
-        //            }
-
-        //            switch (userId)
-        //            {
-        //                case -1:
-        //                    message = "Username already exists.\\nPlease choose a different username.";
-        //                    break;
-        //                default:
-        //                    message = "Registration successful.\\nUser Id: " + userId.ToString();
-        //                    break;
-        //            }
-        //            ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string s = ex.Message;
-        //    }
+            //run cleaning stored procedure
+            var cnnString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(cnnString))
+            {
+                int userId = 0;
+                using (SqlCommand cmd = new SqlCommand("DeleteRecent"))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = conn;
+                        conn.Open();
+                        cmd.ExecuteScalar();
+                        conn.Close();
+                    }
+                }
+            }
         }
 
         protected void signInButton_Click(object sender, EventArgs e)

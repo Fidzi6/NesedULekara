@@ -335,46 +335,6 @@ namespace NesedULekara_webapp
                             conn.Close();
                         }
                     }
-
-                    
-
-                    ////create new specific table
-                    //using (SqlConnection con = new SqlConnection(cnnString))
-                    //{
-                    //    try
-                    //    {
-                    //        string command = @"CREATE TABLE ";
-                    //        command += doctorEmailTxb.Text.Replace(".", "_"); //table name = dbo.doctor_email
-                    //        command += "(date DATETIME";
-                    //        for (int i = 0; i < startIntervals.Count; i++) //cerate specific number of rows - depends on numberOfIntervals
-                    //        {
-                    //            command += ", t";
-                    //            command += startIntervals[i];// start.AddMinutes(i * interval).ToString("HHmm");
-                    //            command += "_";
-                    //            string sub1 = startIntervals[i].Substring(0, 2);
-                    //            string sub2 = startIntervals[i].Substring(2, 2);
-                    //            string sub = sub1 + ":" + sub2;
-                    //            DateTime dt = DateTime.Parse(sub);
-                    //            //int ii = Int32.Parse(startIntervals[i]);
-                    //            command += dt.AddMinutes(interval).ToString("HHmm"); //(ii + interval).ToString(); //start.AddMinutes((i + 1) * interval).ToString("HHmm");
-                    //            command += " VARCHAR(50)";
-                    //        }
-                    //        command += ");";
-
-                    //        using (SqlCommand cmd = new SqlCommand(command, con))
-                    //        {
-                    //            con.Open();
-                    //            cmd.ExecuteNonQuery();
-                    //            con.Close();
-                    //        }
-
-                    //        doctorRegistrationStatusTxb.Text = "Registrácia úspešná.";
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        doctorRegistrationStatusTxb.Text = ex.ToString();
-                    //    }
-                    //}
                 }
                 else //wrong emergency or lunch intervals was inserted
                 {
