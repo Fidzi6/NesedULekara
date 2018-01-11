@@ -25,8 +25,7 @@ namespace NesedLekar
         public string doctor_name { get; set; }
         public string patient_name { get; set; }
         public string comment { get; set; }
-        public string date { get; set; }
-        public string time { get; set; }
+        public DateTime dateTime { get; set; }
         public string rating { get; set; }
     }
 
@@ -52,16 +51,15 @@ namespace NesedLekar
     public class patients
     {
         public string id { get; set; }
-        public string date { get; set; }
-        public string time { get; set; }
         public string patient { get; set; }
         public string doctor { get; set; }
+        public DateTime dateTime { get; set; }
     }
 
     public class DoktoriIntervals
     {
         public string id { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
         public string doktor { get; set; }
         public string i1 { get; set; }
         public string i2 { get; set; }

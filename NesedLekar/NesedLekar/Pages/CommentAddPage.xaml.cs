@@ -43,17 +43,13 @@ namespace NesedLekar.Pages
             string s, d, t;
             commentREB.Document.GetText(Windows.UI.Text.TextGetOptions.None, out s);
             if (s.Trim() != string.Empty)
-            {                
-                DateTime dt = DateTime.Now;
-                d = dt.ToString("dd.MM.yyyy");
-                t = dt.ToString("HH:mm");
+            {
                 comments c = new comments();
                 c.patient_name = App.Patient;
                 c.doctor_name = doctor.Email;
 
                 c.comment = s;
-                c.date = d;
-                c.time = t;
+                c.dateTime = DateTime.Now;
                 c.rating = "0";
 
                 App.DatabaseWork.InsertRow(c);

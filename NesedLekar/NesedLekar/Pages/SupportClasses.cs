@@ -152,8 +152,19 @@ namespace NesedLekar.Pages
             }
         }
         public string PatientName { get => comment.patient_name; }
-        public string DateTime { get => comment.date+" ("+comment.time+")"; }
+        public string DateTime
+        { //get => comment.dateTime.ToString("dd.MM.yyyy")+" ("+comment.dateTime.TimeOfDay.ToString("HH:mm")+")"; }
+            get
+            {
+                string s = string.Empty;
 
+                s += comment.dateTime.ToString("dd.MM.yyyy");
+                s += " (";
+                s += comment.dateTime.ToString("HH:mm");
+                s += ")";
+                return s;
+            }
+        }
         public CommentInfo(comments comment)
         {
             this.comment = comment;
@@ -172,8 +183,8 @@ namespace NesedLekar.Pages
         private bool ok;
         
         public DoctorItem Doctor { get { if (ok) return doctor; else return null; } }
-        public string Date { get => order.date; }
-        public string Time { get => order.time; }
+        public string Date { get => order.dateTime.ToString("dd.MM.yyyy"); }
+        public string Time { get => order.dateTime.ToString("HH:mm"); }
 
 
         public Order(patients patient)
@@ -205,7 +216,7 @@ namespace NesedLekar.Pages
         private string time;
         private int index;
 
-        public string Date { get => interval.date; }
+        public string Date { get => interval.date.ToString("dd.MM.yyy"); }
         public string Time { get => time; }
         public string Doctor { get => doctor.Name; }
         public string Adress { get => doctor.Adress; }

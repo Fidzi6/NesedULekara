@@ -87,9 +87,8 @@ namespace NesedLekar.Pages
                 s = DateTime.ParseExact(doctor.StartOrdinary, "HH:mm", CultureInfo.CurrentCulture);
                 e = DateTime.ParseExact(doctor.EndOrdinary, "HH:mm", CultureInfo.CurrentCulture);
                 a = s;
-                str = dateDTP.Date.Value.ToString("dd.MM.yyyy");
 
-                List<DoktoriIntervals> ldi = await App.DatabaseWork.SelectAsynch(doctor.Email, str);
+                List<DoktoriIntervals> ldi = await App.DatabaseWork.SelectAsynch(doctor.Email, dateDTP.Date.Value.DateTime);
 
                 if (ldi == null || ldi.Count < 1)
                 {
@@ -102,7 +101,7 @@ namespace NesedLekar.Pages
                         a = a.AddMinutes(interval);
                     }
                     data.doktor = doctor.Email;
-                    data.date = str;
+                    data.date = dateDTP.Date.Value.DateTime;
                 }
                 else
                 {
@@ -117,8 +116,9 @@ namespace NesedLekar.Pages
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ex.Message.ToString();
                 ls = new List<string>();
             }
 

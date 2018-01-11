@@ -31,11 +31,11 @@ namespace NesedLekar
             Saver.Inicialize();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             loginTB.Text = "";
             passwordTB.Password = "";
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;            
         }
 
         private async void loginBT_Click(object sender, RoutedEventArgs e)

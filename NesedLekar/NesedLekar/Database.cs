@@ -87,12 +87,12 @@ namespace NesedLekar
 
         public async Task<List<DoktoriIntervals>> SelectAsynch(patients order)
         {
-            return await tableIntervals.Where(x => x.doktor == order.doctor && x.date==order.date).ToListAsync();
+            return await tableIntervals.Where(x => x.doktor == order.doctor && x.date == order.dateTime).ToListAsync();
         }
 
-        public async Task<List<DoktoriIntervals>> SelectAsynch(string doctor, string date)
+        public async Task<List<DoktoriIntervals>> SelectAsynch(string doctor, DateTime date)
         {
-            return await tableIntervals.Where(x => x.doktor == doctor && x.date == date).ToListAsync();
+            return await tableIntervals.Where(x => x.doktor == doctor && x.date.Day == date.Day && x.date.Month==date.Month && x.date.Year==date.Year).ToListAsync();
         }
 
         public async Task<IEnumerable<doctors>> AllDoctors()

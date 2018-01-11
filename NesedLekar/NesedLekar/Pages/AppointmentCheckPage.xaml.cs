@@ -49,9 +49,10 @@ namespace NesedLekar.Pages
 
         private void okAppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            DateTime dt = info.Row.date;
+            dt = dt.Date + new TimeSpan(int.Parse(info.Time.Split(':')[0]), int.Parse(info.Time.Split(':')[1]), 0);
             patients p = new patients();
-            p.date = info.Row.date;
-            p.time = info.Time;
+            p.dateTime = dt;
             p.patient = App.Patient;
             p.doctor = info.Row.doktor;
 
